@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public Telephone telephone;
     public Player player;
 
+    public float cooldownPoliceEnervement = 5.0f;
     public float tempsAvantAppel;
 
     // Start is called before the first frame update
@@ -22,40 +23,48 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("q"))
+        if (Input.GetKeyDown("r"))
         {
             police.AugmenterAgressivite(10);
             police.PrintPoliceTest();
 
 
         }
-        else if (Input.GetKeyDown("e"))
+        else if (Input.GetKeyDown("r"))
         {
             police.DiminuerAgressivite(10);
             police.PrintPoliceTest();
         }
 
+
         if(tempsAvantAppel + /*police.GetFrequenceAppel()*/ 10 <= Time.time && !telephone.isRinging)
         {
             telephone.StartCall();
         }
-
-       // if (tempsAvantAppel + /*police.GetFrequenceAppel()*/ 13 <= Time.time)
-       // {
-       //     telephone.ConversationBegin();
-       // }
-
-      //  if (tempsAvantAppel + /*police.GetFrequenceAppel()*/ 16 <= Time.time)
-       // {
-       //     telephone.endCall();
-      //      tempsAvantAppel = Time.time;
-       // }
+               
 
         if (Time.time >= telephone.timeToAnswer + telephone.timeStartCall && telephone.isRinging)
         {
             telephone.endCall();
             police.AugmenterAgressivite(25);
-            police.PrintPoliceTest();
+            print("enervement maximal");
+            print(telephone.isRinging);
+            cooldownPoliceEnervement = 5.0f;
+            tempsAvantAppel = Time.time;
+
+        }
+
+
+        if (telephone.isRinging)
+        {
+            cooldownPoliceEnervement -= Time.deltaTime;
+            if(cooldownPoliceEnervement <= 0)
+            {
+                police.AugmenterAgressivite(1);
+                print("enervement + 1");
+                police.PrintPoliceTest();
+                cooldownPoliceEnervement = 5.0f;
+            }
         }
 
 

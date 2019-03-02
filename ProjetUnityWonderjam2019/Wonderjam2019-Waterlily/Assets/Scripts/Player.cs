@@ -35,7 +35,8 @@ public class Player : MonoBehaviour
         {
             angle = Mathf.Atan2(rigidbody.velocity.x, rigidbody.velocity.y) * Mathf.Rad2Deg;
         }
-        rigidbody.MoveRotation((-(int)angle / 90) * 90); 
+        
+        
 
     }
 
@@ -47,6 +48,7 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         Movement();
+        rigidbody.MoveRotation((-(int)angle / 90)*90);
     }
     
 

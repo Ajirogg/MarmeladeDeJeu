@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Telephone : Utilisable
+public class Telephone : MonoBehaviour, Utilisable
 {
     public bool isRinging;
     public int timeToAnswer;
@@ -18,7 +18,7 @@ public class Telephone : Utilisable
     // Update is called once per frame
     void Update()
     {
-      
+
     }
 
     public void StartCall()
@@ -42,7 +42,7 @@ public class Telephone : Utilisable
         print("o revoar fdp");
     }
 
-    public override void Use()
+    public void Use()
     {
         throw new System.NotImplementedException();
     }

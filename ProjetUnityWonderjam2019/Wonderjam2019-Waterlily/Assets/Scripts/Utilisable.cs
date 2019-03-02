@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Utilisable : MonoBehaviour
+public interface Utilisable
 {
-    public abstract void Use();
+    void Use();
 }

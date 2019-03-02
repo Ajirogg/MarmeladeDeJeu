@@ -403,9 +403,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 71412832}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98d816c929d85984595ed2998f4d1a8c, type: 3}
+  m_Script: {fileID: 11500000, guid: 36a1e696d66e9d443a07ab4bcf35e9c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isRinging: 0
+  isAnswering: 0
+  timeToAnswer: 0
+  timeStartCall: 0
 --- !u!1 &144695900
 GameObject:
   m_ObjectHideFlags: 0
@@ -484,6 +488,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &361305800
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 361305802}
+  - component: {fileID: 361305801}
+  m_Layer: 0
+  m_Name: Police
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &361305801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 361305800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1421514d7cc1d442b45770614e74d94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frequenceAppel: 60
+  frequenceAppelMinimum: 60
+--- !u!4 &361305802
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 361305800}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.3724445, y: -5.0759187, z: -0.16457458}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &558458018
 GameObject:
@@ -608,6 +657,57 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.3333334, y: 1.3333334}
   m_EdgeRadius: 0
+--- !u!1 &771455265
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 771455267}
+  - component: {fileID: 771455266}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &771455266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771455265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1db1635638573574bab2c5c1a7a82a01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  police: {fileID: 361305801}
+  gOtage1: {fileID: 0}
+  gOtage2: {fileID: 0}
+  gOtage3: {fileID: 0}
+  telephone: {fileID: 71412836}
+  player: {fileID: 28614866}
+  cooldownPoliceEnervement: 5
+  tempsAvantAppel: 0
+--- !u!4 &771455267
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771455265}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.3724445, y: -5.0759187, z: -0.16457458}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1383407400
 GameObject:
   m_ObjectHideFlags: 0
@@ -810,7 +910,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 9.610456
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -964,6 +1064,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Otage
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047208566674066268, guid: 5ef8f6e280959b5428f427823a909808,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1685330924797049329, guid: 5ef8f6e280959b5428f427823a909808,
         type: 3}

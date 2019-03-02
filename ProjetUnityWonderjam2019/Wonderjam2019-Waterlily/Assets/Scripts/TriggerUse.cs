@@ -23,13 +23,20 @@ public class TriggerUse : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collider)
     {
 
-            
-            if (collider.gameObject.GetComponent<Utilisable>() != null)
+
+        if (collider.gameObject.GetComponent<Utilisable>() != null)
+        {
+
+            if (collider.gameObject.GetComponent<SpriteGlow.SpriteGlowEffect>() != null)
             {
-                
-                ObjetsUtilisables.Add(collider.gameObject);
+                collider.gameObject.GetComponent<SpriteGlow.SpriteGlowEffect>().enabled = true;
             }
-           
+            else
+            {
+                SpriteGlow.SpriteGlowEffect n= collider.gameObject.AddComponent<SpriteGlow.SpriteGlowEffect>();
+                n.GlowBrightness = 1.38f;
+            }
+        }
     
     }
 
@@ -38,6 +45,10 @@ public class TriggerUse : MonoBehaviour
         if (collider.gameObject.GetComponent<Utilisable>() != null)
         {
             ObjetsUtilisables.Remove(collider.gameObject);
+            if (collider.gameObject.GetComponent<SpriteGlow.SpriteGlowEffect>() != null)
+            {
+                collider.gameObject.GetComponent<SpriteGlow.SpriteGlowEffect>().enabled = false;
+            }
         }
     }  
 }

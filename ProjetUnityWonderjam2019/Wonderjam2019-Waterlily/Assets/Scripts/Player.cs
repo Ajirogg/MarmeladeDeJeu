@@ -23,8 +23,8 @@ public class Player : MonoBehaviour
   
     void Update()
     {
-        horizontal = Input.GetAxis("Horizontal");
-        vertical = Input.GetAxis("Vertical");
+        horizontal = Input.GetAxisRaw("Horizontal");
+        vertical = Input.GetAxisRaw("Vertical");
 
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -33,9 +33,9 @@ public class Player : MonoBehaviour
 
         if (rigidbody.velocity.sqrMagnitude > 5)
         {
-            angle = Mathf.Atan2(rigidbody.velocity.x, rigidbody.velocity.y) * Mathf.Rad2Deg;            
+            angle = Mathf.Atan2(rigidbody.velocity.x, rigidbody.velocity.y) * Mathf.Rad2Deg;
         }
-        rigidbody.MoveRotation(-angle);
+        rigidbody.MoveRotation((-(int)angle / 90) * 90); 
 
     }
 

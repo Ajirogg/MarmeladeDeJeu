@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
             Use();
         }
 
-        if (rigidbody.velocity.sqrMagnitude > 0.2)
+        if (rigidbody.velocity.sqrMagnitude > 0.4)
         {
             angle = Mathf.Atan2(rigidbody.velocity.x, rigidbody.velocity.y) * Mathf.Rad2Deg;
         }

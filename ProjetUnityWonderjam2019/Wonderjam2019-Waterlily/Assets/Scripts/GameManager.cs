@@ -50,7 +50,6 @@ public class GameManager : MonoBehaviour
             telephone.endCall();
             police.AugmenterAgressivite(25);
             print("enervement maximal");
-            print(telephone.isRinging);
             cooldownPoliceEnervement = 5.0f;
             tempsAvantAppel = Time.time;
 
@@ -64,7 +63,6 @@ public class GameManager : MonoBehaviour
             {
                 police.AugmenterAgressivite(1);
                 print("enervement + 1");
-                police.PrintPoliceTest();
                 cooldownPoliceEnervement = 5.0f;
             }
         }

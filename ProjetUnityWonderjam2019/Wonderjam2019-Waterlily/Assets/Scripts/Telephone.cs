@@ -43,12 +43,14 @@ public class Telephone : MonoBehaviour, Utilisable
         isAnswering = false;
         isRinging = false;
         timeToAnswer = Random.Range(10, 15 + 1);
-        print("o revoar fdp");
+        print("o revoar");
     }
 
     public void Use()
     {
-        if(isRinging)
+        if (isRinging) { 
             ConversationBegin();
+            endCall();
+        }
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Telephone : MonoBehaviour, Utilisable
 {
     public bool isRinging;
+    public bool isAnswering;
     public int timeToAnswer;
     public float timeStartCall;
 
@@ -12,6 +13,7 @@ public class Telephone : MonoBehaviour, Utilisable
     void Start()
     {
         isRinging = false;
+        isAnswering = false;
         timeToAnswer = Random.Range(10, 15 + 1);
     }
 
@@ -30,6 +32,7 @@ public class Telephone : MonoBehaviour, Utilisable
 
     public void ConversationBegin()
     {
+        isAnswering = true;
         isRinging = false;
         print("ALLO");
         // Doit appeler la fonction de discussion entre police et preneur d'otages
@@ -37,6 +40,7 @@ public class Telephone : MonoBehaviour, Utilisable
 
     public void endCall()
     {
+        isAnswering = false;
         isRinging = false;
         timeToAnswer = Random.Range(10, 15 + 1);
         print("o revoar fdp");
@@ -44,6 +48,7 @@ public class Telephone : MonoBehaviour, Utilisable
 
     public void Use()
     {
-        throw new System.NotImplementedException();
+        if(isRinging)
+            ConversationBegin();
     }
 }

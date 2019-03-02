@@ -37,14 +37,16 @@ public class GameManager : MonoBehaviour
         }
 
 
-        if(tempsAvantAppel + /*police.GetFrequenceAppel()*/ 10 <= Time.time && !telephone.isRinging)
+        if(tempsAvantAppel + /*police.GetFrequenceAppel()*/ 10 <= Time.time && !telephone.isRinging && !telephone.isAnswering)
         {
             telephone.StartCall();
+            
         }
                
 
         if (Time.time >= telephone.timeToAnswer + telephone.timeStartCall && telephone.isRinging)
         {
+            
             telephone.endCall();
             police.AugmenterAgressivite(25);
             print("enervement maximal");

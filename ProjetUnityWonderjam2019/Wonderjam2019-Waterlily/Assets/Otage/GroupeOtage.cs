@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GroupeOtage : Utilisable
+public class GroupeOtage : MonoBehaviour, Utilisable
 {
     public Otage otage;
     public int nbOtage = 3 ;
@@ -46,7 +46,7 @@ public class GroupeOtage : Utilisable
         }
     }
 
-    public override void Use()
+    public void Use()
     {
         throw new System.NotImplementedException();
     }

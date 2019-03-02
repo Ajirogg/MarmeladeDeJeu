@@ -4,5 +4,10 @@ using UnityEngine;
 
 public abstract class Utilisable : MonoBehaviour
 {
+    private void Awake()
+    {
+        gameObject.tag = "Utilisable";
+        
+    }
     public abstract void Use();
 }

@@ -11,10 +11,13 @@ public class Player : MonoBehaviour
     public float rotationSpeed = 1f;
     Vector3 hitPoint;
     new Rigidbody2D rigidbody;
-
+    TriggerUse triggerUse;
+    float angle;
     void Start()
     {
         rigidbody = this.GetComponent<Rigidbody2D>();
+        triggerUse = this.transform.Find("TriggerUse").GetComponent<TriggerUse>();
+        
     }
 
     public float speed = 5f;
@@ -22,6 +25,25 @@ public class Player : MonoBehaviour
     {
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Use();
+        }
+
+    }
+
+    private void Use()
+    {
+        HashSet<Utilisable> utilisables = triggerUse.GetObjetsUtilisablesInTrigger();
+        
+        foreach (Utilisable u in utilisables)
+        {
+            print(u);
+            u.Use();
+               
+        }
+           
     }
 
     private void FixedUpdate()
@@ -32,12 +54,14 @@ public class Player : MonoBehaviour
 
     private void Movement()
     {
-        rigidbody.velocity = new Vector2(horizontal * speed, vertical * speed);
 
-        if (rigidbody.velocity != Vector2.zero)
+        Vector2 velocity = new Vector2(horizontal * speed, vertical * speed);
+        rigidbody.velocity = velocity;
+        
+        if(velocity != Vector2.zero)
         {
-            float angle = Mathf.Atan2(rigidbody.velocity.x, rigidbody.velocity.y) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.back);
+            angle = Mathf.Atan2(rigidbody.velocity.x, rigidbody.velocity.y) * Mathf.Rad2Deg;
         }
+        rigidbody.MoveRotation(-angle);
     }
 }

@@ -70,6 +70,16 @@ public class ListeQuestions
         uneQuestion = new Question("Est-ce que les otages vont bien ?", uneListeReponses);
         questionsPolice.Add(uneQuestion);
 
+        uneListeReponses = new List<Reponse>
+        {
+            new Reponse("Du sang !", -100),
+            new Reponse("De l'argent", 50),
+            new Reponse("La paix dans le monde", -25),
+            new Reponse("Le plaisir", -50),
+        };
+
+        uneQuestion = new Question("Quels sont vos revendications ?", uneListeReponses);
+        questionsPolice.Add(uneQuestion);
 
     }
 
@@ -79,6 +89,7 @@ public class ListeQuestions
         List<Reponse> uneListeReponses = new List<Reponse>
         {
             new Reponse("S4CR4T", 5000),
+            new Reponse("EXIT", -25),
         };
 
         Question uneQuestion = new Question("//BANK-ACCOUNT NUMBER 4861-8475// PASSWORD???", uneListeReponses);
@@ -87,12 +98,30 @@ public class ListeQuestions
 
         uneListeReponses = new List<Reponse>
         {
-            new Reponse("Reponse", 50),
+            new Reponse("1CROY4BL3", 5000),
+            new Reponse("EXIT", -25),
         };
 
         uneQuestion = new Question("//BANK-ACCOUNT NUMBER 1145-8445// PASSWORD???", uneListeReponses);
         questionsOrdinateur.Add(uneQuestion);
 
+        uneListeReponses = new List<Reponse>
+        {
+            new Reponse("DEUS VULT", 3000),
+            new Reponse("EXIT", -25),
+        };
+
+        uneQuestion = new Question("//BANK-ACCOUNT NUMBER 5789-5768// PASSWORD???", uneListeReponses);
+        questionsOrdinateur.Add(uneQuestion);
+
+        uneListeReponses = new List<Reponse>
+        {
+            new Reponse("PASSWORD", 3000),
+            new Reponse("EXIT", -25),
+        };
+
+        uneQuestion = new Question("//BANK-ACCOUNT NUMBER 5805-6049// PASSWORD???", uneListeReponses);
+        questionsOrdinateur.Add(uneQuestion);
 
     }
 
@@ -101,13 +130,12 @@ public class ListeQuestions
     {
         List<Reponse> uneListeReponses = new List<Reponse>
         {
-            new Reponse("Calmez-vous!", 50),
-            new Reponse("Peut-etre", -25),
-            new Reponse("Non", -50),
-            new Reponse("Quels otages?", -100),
+            new Reponse("Calmez-vous!", 25),
+            new Reponse("Tirer en l'air", 50),
+            new Reponse("Partir", 0)
         };
 
-        Question uneQuestion = new Question("Est-ce que les otages vont bien ?", uneListeReponses);
+        Question uneQuestion = new Question("Que faire ?", uneListeReponses);
         questionsOtageGroupe.Add(uneQuestion);
 
 
@@ -120,13 +148,12 @@ public class ListeQuestions
     {
         List<Reponse> uneListeReponses = new List<Reponse>
         {
-            new Reponse("Calmez-vous", 50),
-            new Reponse("Peut-etre", -25),
-            new Reponse("Non", -50),
-            new Reponse("Quels otages?", -100),
+           new Reponse("La ferme!", 25),
+            new Reponse("Le tuer", 50),
+            new Reponse("Partir", 0)
         };
 
-        Question uneQuestion = new Question("Est-ce que les otages vont bien ?", uneListeReponses);
+        Question uneQuestion = new Question("Que faire ?", uneListeReponses);
         questionsOtageIndividuel.Add(uneQuestion);
 
 

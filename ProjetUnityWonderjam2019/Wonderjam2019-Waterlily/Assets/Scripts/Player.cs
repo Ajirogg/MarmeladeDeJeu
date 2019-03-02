@@ -27,10 +27,6 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         Movement();
-
-
-
-
     }
     
 

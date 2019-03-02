@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Otage : MonoBehaviour
+public class Otage : Utilisable
 {
     public int panic = 0 ;
     public float stressPeriod = 5;
@@ -56,5 +56,9 @@ public class Otage : MonoBehaviour
         if (rand == 100 / quitChance)
             Destroy(this.gameObject);
         lastStressRaise = Time.time;
+    }
+    public override void Use()
+    {
+        throw new System.NotImplementedException();
     }
 }

@@ -6,12 +6,13 @@ public class Player : MonoBehaviour
     float horizontal;
     float vertical;
 
-    public float runSpeed = 20.0f;
+    public float runSpeed = 10f;
     public float rotationSpeed = 1f;
     Vector3 hitPoint;
     new Rigidbody2D rigidbody;
     TriggerUse triggerUse;
     float angle;
+
     void Start()
     {
         rigidbody = this.GetComponent<Rigidbody2D>();
@@ -19,7 +20,7 @@ public class Player : MonoBehaviour
         
     }
 
-    public float speed = 5f;
+  
     void Update()
     {
         horizontal = Input.GetAxis("Horizontal");
@@ -30,6 +31,13 @@ public class Player : MonoBehaviour
             Use();
         }
 
+        if (rigidbody.velocity.sqrMagnitude > 5)
+        {
+            angle = Mathf.Atan2(rigidbody.velocity.x, rigidbody.velocity.y) * Mathf.Rad2Deg;
+            rigidbody.MoveRotation(-angle);
+        }
+       
+
     }
 
     private void Use()
@@ -38,8 +46,7 @@ public class Player : MonoBehaviour
         
         foreach (GameObject u in utilisables)
         {
-
-            print(u.GetType());
+            
             u.GetComponent<Utilisable>().Use();
                
         }
@@ -55,13 +62,21 @@ public class Player : MonoBehaviour
     private void Movement()
     {
 
-        Vector2 velocity = new Vector2(horizontal * speed, vertical * speed);
-        rigidbody.velocity = velocity;
+        rigidbody.velocity = new Vector2(Mathf.Lerp(0, Input.GetAxis("Horizontal") * runSpeed, 0.8f),
+                                                 Mathf.Lerp(0, Input.GetAxis("Vertical") * runSpeed, 0.8f));
+
+
         
-        if(velocity != Vector2.zero)
-        {
-            angle = Mathf.Atan2(rigidbody.velocity.x, rigidbody.velocity.y) * Mathf.Rad2Deg;
-        }
-        rigidbody.MoveRotation(-angle);
+
+
+        // Vector2 velocity = new Vector2(horizontal * speed, vertical * speed);
+        //rigidbody.velocity = velocity;
+
+
+
+        //transform.rotation = Quaternion.LookRotation(previous-cur, Vector3.back);
+        //velocity = previous - cur;
+
+
     }
 }

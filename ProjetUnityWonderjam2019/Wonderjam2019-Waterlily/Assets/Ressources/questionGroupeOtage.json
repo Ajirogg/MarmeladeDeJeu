@@ -1,0 +1,10 @@
+{
+	"1": {
+		"Question": "Que faire ?",
+		"Reponses": {
+			"1" : ["Calmez-vous !", 25],
+			"2" : ["Tirer en l'air", 50],
+			"3" : ["Partir", 0],
+		}
+	},
+}

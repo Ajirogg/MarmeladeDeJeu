@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class TriggerUse : MonoBehaviour
@@ -20,12 +21,22 @@ public class TriggerUse : MonoBehaviour
 
     public HashSet<GameObject> ObjetsUtilisables { get => objetsUtilisables; set => objetsUtilisables = value; }
 
+    public  GameObject FirstObject()
+    {
+        return ObjetsUtilisables.ToList()[0];
+    } 
+
     private void OnTriggerEnter2D(Collider2D collider)
     {
 
 
         if (collider.gameObject.GetComponent<Utilisable>() != null)
         {
+
+            ObjetsUtilisables.Add(collider.gameObject);
+
+            if (collider.gameObject != FirstObject()) // Maybe improve that ?
+                return;
 
             if (collider.gameObject.GetComponent<SpriteGlow.SpriteGlowEffect>() != null)
             {

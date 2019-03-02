@@ -41,15 +41,7 @@ public class Player : MonoBehaviour
 
     private void Use()
     {
-        HashSet<GameObject> utilisables = triggerUse.ObjetsUtilisables;
-        
-        foreach (GameObject u in utilisables)
-        {
-            
-            u.GetComponent<Utilisable>().Use();
-               
-        }
-           
+        triggerUse.FirstObject().GetComponent<Utilisable>().Use();           
     }
 
     private void FixedUpdate()

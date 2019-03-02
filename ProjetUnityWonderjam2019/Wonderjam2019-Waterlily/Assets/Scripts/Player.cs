@@ -22,14 +22,20 @@ public class Player : MonoBehaviour
     {
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
-
-       
-
     }
 
     private void FixedUpdate()
     {
-       
+        Movement();
+
+
+
+
+    }
+    
+
+    private void Movement()
+    {
         rigidbody.velocity = new Vector2(horizontal * speed, vertical * speed);
 
         if (rigidbody.velocity != Vector2.zero)
@@ -37,8 +43,5 @@ public class Player : MonoBehaviour
             float angle = Mathf.Atan2(rigidbody.velocity.x, rigidbody.velocity.y) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.back);
         }
-        
-
     }
-        
 }

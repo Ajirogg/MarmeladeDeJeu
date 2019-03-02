@@ -33,24 +33,15 @@ public class Player : MonoBehaviour
 
         if (rigidbody.velocity.sqrMagnitude > 5)
         {
-            angle = Mathf.Atan2(rigidbody.velocity.x, rigidbody.velocity.y) * Mathf.Rad2Deg;
-            rigidbody.MoveRotation(-angle);
+            angle = Mathf.Atan2(rigidbody.velocity.x, rigidbody.velocity.y) * Mathf.Rad2Deg;            
         }
-       
+        rigidbody.MoveRotation(-angle);
 
     }
 
     private void Use()
     {
-        HashSet<GameObject> utilisables = triggerUse.ObjetsUtilisables;
-        
-        foreach (GameObject u in utilisables)
-        {
-            
-            u.GetComponent<Utilisable>().Use();
-               
-        }
-           
+        triggerUse.FirstObject().GetComponent<Utilisable>().Use();           
     }
 
     private void FixedUpdate()

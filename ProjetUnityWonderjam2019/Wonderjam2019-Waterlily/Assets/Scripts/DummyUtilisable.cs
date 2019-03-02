@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DummyUtilisable : MonoBehaviour, Utilisable
-{
-    
+{   
 
     // Start is called before the first frame update
     private void Awake()

@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     public float runSpeed = 20.0f;
     public float rotationSpeed = 1f;
     Vector3 hitPoint;
-    Rigidbody2D rigidbody;
+    new Rigidbody2D rigidbody;
 
     void Start()
     {

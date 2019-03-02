@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DummyUtilisable : Utilisable
+public class DummyUtilisable : MonoBehaviour, Utilisable
 {
-    public override void Use()
-    {
-        throw new System.NotImplementedException();
-    }
+    
 
     // Start is called before the first frame update
     private void Awake()
@@ -20,5 +17,10 @@ public class DummyUtilisable : Utilisable
     void Update()
     {
         
+    }
+
+    void Utilisable.Use()
+    {
+        throw new System.NotImplementedException();
     }
 }

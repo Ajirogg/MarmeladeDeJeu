@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -35,12 +34,13 @@ public class Player : MonoBehaviour
 
     private void Use()
     {
-        HashSet<Utilisable> utilisables = triggerUse.GetObjetsUtilisablesInTrigger();
+        HashSet<GameObject> utilisables = triggerUse.ObjetsUtilisables;
         
-        foreach (Utilisable u in utilisables)
+        foreach (GameObject u in utilisables)
         {
-            print(u);
-            u.Use();
+
+            print(u.GetType());
+            u.GetComponent<Utilisable>().Use();
                
         }
            

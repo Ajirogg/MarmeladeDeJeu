@@ -16,33 +16,28 @@ public class TriggerUse : MonoBehaviour
         
     }
 
-    private HashSet<Utilisable> ObjetsUtilisables = new HashSet<Utilisable>();
+    private HashSet<GameObject> objetsUtilisables = new HashSet<GameObject>();
 
-    public HashSet<Utilisable> GetObjetsUtilisablesInTrigger()
-    {
-        return ObjetsUtilisables;
-    }
-
-
+    public HashSet<GameObject> ObjetsUtilisables { get => objetsUtilisables; set => objetsUtilisables = value; }
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
 
             
-            if (collider.gameObject.tag == "Utilisable")
+            if (collider.gameObject.GetComponent<Utilisable>() != null)
             {
                 
-                ObjetsUtilisables.Add(collider.gameObject.GetComponent<Utilisable>());
+                ObjetsUtilisables.Add(collider.gameObject);
             }
+           
     
     }
 
     private void OnTriggerExit2D(Collider2D collider)
     {
-        if (collider.gameObject.tag == "Utilisable")
+        if (collider.gameObject.GetComponent<Utilisable>() != null)
         {
-
-            ObjetsUtilisables.Remove(collider.gameObject.GetComponent<Utilisable>());
+            ObjetsUtilisables.Remove(collider.gameObject);
         }
     }  
 }

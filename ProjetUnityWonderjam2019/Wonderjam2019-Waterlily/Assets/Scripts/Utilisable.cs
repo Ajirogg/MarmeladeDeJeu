@@ -2,12 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Utilisable : MonoBehaviour
+public interface Utilisable
 {
-    private void Awake()
-    {
-        gameObject.tag = "Utilisable";
-        
-    }
-    public abstract void Use();
+    void Use();
 }

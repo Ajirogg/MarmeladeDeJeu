@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Telephone : Utilisable
+public class Telephone : MonoBehaviour, Utilisable
 {
     public bool isRinging;
 
@@ -29,7 +29,7 @@ public class Telephone : Utilisable
         // Doit appeler la fonction de discussion entre police et preneur d'otages
     }
 
-    public override void Use()
+    public void Use() //Interface implementation
     {
         throw new System.NotImplementedException();
     }

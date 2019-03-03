@@ -167,7 +167,7 @@ public class ListeQuestions
 
         uneListeReponses = new List<Reponse>
         {
-            new Reponse("R3P0NS3", 3),
+            new Reponse("REPONSE", 3),
         };
 
         uneQuestion = new Question("//BANK-ACCOUNT NUMBER " + 3333 + "-" + 4571 + "// PASSWORD???", uneListeReponses);
@@ -183,7 +183,7 @@ public class ListeQuestions
 
         uneListeReponses = new List<Reponse>
         {
-            new Reponse("PR3SS1ON", 3),
+            new Reponse("PRESSION", 3),
         };
 
         uneQuestion = new Question("//BANK-ACCOUNT NUMBER " + 4117 + "-" + 3346 + "// PASSWORD???", uneListeReponses);
@@ -191,7 +191,7 @@ public class ListeQuestions
 
         uneListeReponses = new List<Reponse>
         {
-            new Reponse("3XPLOR4T1ON", 4),
+            new Reponse("EXPLORATION", 4),
         };
 
         uneQuestion = new Question("//BANK-ACCOUNT NUMBER " + 2917 + "-" + 9341 + "// PASSWORD???", uneListeReponses);
@@ -207,7 +207,7 @@ public class ListeQuestions
 
         uneListeReponses = new List<Reponse>
         {
-            new Reponse("MULT1JOU3R", 3),
+            new Reponse("MULTIJOUEUR", 3),
         };
 
         uneQuestion = new Question("//BANK-ACCOUNT NUMBER " + 2917 + "-" + 9341 + "// PASSWORD???", uneListeReponses);
@@ -215,7 +215,7 @@ public class ListeQuestions
 
         uneListeReponses = new List<Reponse>
         {
-            new Reponse("D14LOGU3", 4),
+            new Reponse("DIALOGUE", 4),
         };
 
         uneQuestion = new Question("//BANK-ACCOUNT NUMBER " + 2917 + "-" + 9341 + "// PASSWORD???", uneListeReponses);
@@ -233,7 +233,7 @@ public class ListeQuestions
 
         uneListeReponses = new List<Reponse>
         {
-            new Reponse("R0B0T", 2),
+            new Reponse("ROBOT", 2),
         };
 
         uneQuestion = new Question("//BANK-ACCOUNT NUMBER " + 4561 + "-" +4568 + "// PASSWORD???", uneListeReponses);
@@ -305,7 +305,7 @@ public class ListeQuestions
 
         uneListeReponses = new List<Reponse>
         {
-            new Reponse("K0JIM4", 4),
+            new Reponse("KOJIMA", 4),
         };
 
         uneQuestion = new Question("//BANK-ACCOUNT NUMBER " + 4567 + "-" + 4157 + "// PASSWORD???", uneListeReponses);
@@ -329,7 +329,7 @@ public class ListeQuestions
 
         uneListeReponses = new List<Reponse>
         {
-            new Reponse("GILB3RT", 3),
+            new Reponse("G1LB3RT", 3),
         };
 
         uneQuestion = new Question("//BANK-ACCOUNT NUMBER " + 7999 + "-" + 9999 + "// PASSWORD???", uneListeReponses);
@@ -337,7 +337,7 @@ public class ListeQuestions
 
         uneListeReponses = new List<Reponse>
         {
-            new Reponse("N30N", 2),
+            new Reponse("NEON", 2),
         };
 
         uneQuestion = new Question("//BANK-ACCOUNT NUMBER " + 4556 + "-" + 9754 + "// PASSWORD???", uneListeReponses);
@@ -345,7 +345,7 @@ public class ListeQuestions
 
         uneListeReponses = new List<Reponse>
         {
-            new Reponse("D0LL4R5", 4),
+            new Reponse("DOLLARS", 4),
         };
 
         uneQuestion = new Question("//BANK-ACCOUNT NUMBER " + 4567 + "-" + 2224 + "// PASSWORD???", uneListeReponses);
@@ -353,7 +353,7 @@ public class ListeQuestions
 
         uneListeReponses = new List<Reponse>
         {
-            new Reponse("JUL14N", 3),
+            new Reponse("JULIEN", 3),
         };
 
         uneQuestion = new Question("//BANK-ACCOUNT NUMBER " + 6528 + "-" + 3325 + "// PASSWORD???", uneListeReponses);
@@ -361,7 +361,7 @@ public class ListeQuestions
 
         uneListeReponses = new List<Reponse>
         {
-            new Reponse("LUC45", 3),
+            new Reponse("LUCAS", 3),
         };
 
         uneQuestion = new Question("//BANK-ACCOUNT NUMBER " + 4477 + "-" + 2525 + "// PASSWORD???", uneListeReponses);
@@ -369,7 +369,7 @@ public class ListeQuestions
 
         uneListeReponses = new List<Reponse>
         {
-            new Reponse("GU1LL4UM3", 4),
+            new Reponse("GUILLAUME", 4),
         };
 
         uneQuestion = new Question("//BANK-ACCOUNT NUMBER " + 6666 + "-" + 5252 + "// PASSWORD???", uneListeReponses);
@@ -377,7 +377,7 @@ public class ListeQuestions
 
         uneListeReponses = new List<Reponse>
         {
-            new Reponse("J04QU1M", 4),
+            new Reponse("JOAQUIM", 4),
         };
 
         uneQuestion = new Question("//BANK-ACCOUNT NUMBER " + 6666 + "-" + 6666 + "// PASSWORD???", uneListeReponses);
@@ -385,7 +385,7 @@ public class ListeQuestions
 
         uneListeReponses = new List<Reponse>
         {
-            new Reponse("GUILH3M", 3),
+            new Reponse("GUILHEM", 3),
         };
 
         uneQuestion = new Question("//BANK-ACCOUNT NUMBER " + 4200+ "-" + 0024 + "// PASSWORD???", uneListeReponses);
@@ -393,7 +393,7 @@ public class ListeQuestions
 
         uneListeReponses = new List<Reponse>
         {
-            new Reponse("K1LL14N", 4),
+            new Reponse("KILLIAN", 4),
         };
 
         uneQuestion = new Question("//BANK-ACCOUNT NUMBER " + 1234 + "-" + 3456 + "// PASSWORD???", uneListeReponses);
@@ -401,7 +401,7 @@ public class ListeQuestions
 
         uneListeReponses = new List<Reponse>
         {
-            new Reponse("M4X1M3", 4),
+            new Reponse("MAXIME", 4),
         };
 
         uneQuestion = new Question("//BANK-ACCOUNT NUMBER " + 4757 + "-" + 4567 + "// PASSWORD???", uneListeReponses);

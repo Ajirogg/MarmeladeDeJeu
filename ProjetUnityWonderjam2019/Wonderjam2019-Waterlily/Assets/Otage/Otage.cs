@@ -18,14 +18,14 @@ public class Otage : MonoBehaviour, Utilisable
     private void Start()
     {
         lastStressRaise = Time.time;
-        if (sonar == null)
-            sonar = GameObject.FindObjectOfType<InitSonar>().GetSonar();
-        sonar = GameObject.FindObjectOfType<InitSonar>().GetSonar();
+        sonar = GameObject.FindObjectOfType<SimpleSonarShader_Parent>();
     }
 
-    private SimpleSonarShader_Object sonar;
+    private SimpleSonarShader_Parent sonar;
     public void CreateRing()
     {
+        if (sonar == null)
+            sonar = GameObject.FindObjectOfType<SimpleSonarShader_Parent>();
         sonar.StartSonarRing(transform.position, 1);
     }
 

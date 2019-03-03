@@ -27,11 +27,11 @@ public class ComputerComponent : MonoBehaviour, Utilisable
     public float miningTickNumberToGrow = 4;
 
     public bool isTyping = false;
-    private SimpleSonarShader_Object sonar;
+    private SimpleSonarShader_Parent sonar;
     public void CreateRing()
     {
         if (sonar == null)
-            sonar = GameObject.FindObjectOfType<InitSonar>().GetSonar();
+            sonar = GameObject.FindObjectOfType<SimpleSonarShader_Parent>();
         sonar.StartSonarRing(transform.position, 1);        
     }
 
@@ -48,7 +48,7 @@ public class ComputerComponent : MonoBehaviour, Utilisable
         failureCheckTickCount = 0;
         timeSinceLastFailureCheck = 0;
         currentMiningAmount = miningBaseAmount;
-        sonar = GameObject.FindObjectOfType<InitSonar>().GetSonar();
+        sonar = GameObject.FindObjectOfType<SimpleSonarShader_Parent>();
     }
 
     private float ringCountdown = 1f;

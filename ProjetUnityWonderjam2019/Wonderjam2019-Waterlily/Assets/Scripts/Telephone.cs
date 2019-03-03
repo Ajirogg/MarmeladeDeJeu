@@ -24,14 +24,14 @@ public class Telephone : MonoBehaviour, Utilisable
         timeToAnswer = Random.Range(8, 15 + 1);
         telephoneAnimator = this.GetComponentInChildren<Animator>();
 
-        sonar = GameObject.FindObjectOfType<InitSonar>().GetSonar();
+        sonar = GameObject.FindObjectOfType<SimpleSonarShader_Parent>();
     }
 
-    private SimpleSonarShader_Object sonar;
+    private SimpleSonarShader_Parent sonar;
     public void CreateRing()
     {
-        if(sonar == null)
-            sonar = GameObject.FindObjectOfType<InitSonar>().GetSonar();
+        if (sonar == null)
+            sonar = GameObject.FindObjectOfType<SimpleSonarShader_Parent>();
 
         sonar.StartSonarRing(transform.position, 1);
     }

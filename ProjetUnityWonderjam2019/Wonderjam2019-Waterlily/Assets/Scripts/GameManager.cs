@@ -73,11 +73,11 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (telephone.isAnswering && !questionUI.GetComponent<QuestionManager>().readyToAnswer)
+        /*if (telephone.isAnswering && !questionUI.GetComponent<QuestionManager>().readyToAnswer)
         {
             questionUI.GetComponent<QuestionManager>().readyToAnswer = true;
             questionUI.GetComponent<QuestionManager>().InitialiserQuestion(laListeDesQuestions.GetRandomPolice(),0, telephone);
-        }
+        }*/
 
         //GAME OVER
         if (police.etatPolice == 6 || police.agressivitePolice >= 100)

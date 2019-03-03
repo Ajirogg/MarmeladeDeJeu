@@ -48,14 +48,17 @@ public class Telephone : MonoBehaviour, Utilisable
         isAnswering = true;
         isRinging = false;
         telephoneAnimator.SetBool("isRinging", isRinging);
+        GameManager gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gm.questionUI.GetComponent<QuestionManager>().readyToAnswer = true;
+        gm.questionUI.GetComponent<QuestionManager>().InitialiserQuestion(gm.laListeDesQuestions.GetRandomPolice(), 0, gm.telephone);
         // Doit appeler la fonction de discussion entre police et preneur d'otages
     }
 
     public void endCall()
     {
-        timeLastCall = Time.time;
         isAnswering = false;
         isRinging = false;
+        timeLastCall = Time.time;
         telephoneAnimator.SetBool("isRinging", isRinging);
         timeToAnswer = Random.Range(5, 10 + 1);
     }

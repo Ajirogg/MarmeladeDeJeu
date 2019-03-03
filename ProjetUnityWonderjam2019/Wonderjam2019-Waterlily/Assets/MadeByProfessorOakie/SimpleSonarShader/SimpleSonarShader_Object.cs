@@ -79,24 +79,15 @@ public class SimpleSonarShader_Object : MonoBehaviour
         // Send updated queues to the shaders
         foreach (Renderer r in ObjectRenderers)
         {
-            if(r != null)
-            {
-                r.material.SetVectorArray("_hitPts", positionsQueue.ToArray());
-                r.material.SetFloatArray("_Intensity", intensityQueue.ToArray());
-            }
-            else
-            {
-                break;
-            }            
+           
+            r.material.SetVectorArray("_hitPts", positionsQueue.ToArray());
+            r.material.SetFloatArray("_Intensity", intensityQueue.ToArray());
+                     
         }
     }
 
 
-    private void ResetRenderer()
-    {
 
-        ObjectRenderers = this.GetComponentsInChildren<Renderer>();
-    }
 
 
     void OnCollisionEnter(Collision collision)

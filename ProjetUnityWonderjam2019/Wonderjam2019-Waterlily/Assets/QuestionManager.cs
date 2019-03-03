@@ -31,7 +31,7 @@ public class QuestionManager : MonoBehaviour
     {
         stuff = stuff_;
         laQuestion = laQuestion_;
-        alreadyAnswered = false;
+        alreadyAnswered = true;
 
 
         goQuestion = this.gameObject;
@@ -40,6 +40,10 @@ public class QuestionManager : MonoBehaviour
         if (type == 1)
         {
             goQuestion.GetComponent<Image>().sprite = imageUI[1];
+        }
+        else
+        {
+            goQuestion.GetComponent<Image>().sprite = imageUI[0];
         }
 
         goQuestion.GetComponentInChildren<Text>().text = laQuestion.stringQuestion;

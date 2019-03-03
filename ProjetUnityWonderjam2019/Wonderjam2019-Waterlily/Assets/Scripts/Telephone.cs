@@ -11,6 +11,7 @@ public class Telephone : MonoBehaviour, Utilisable
 
     public float timeLastCall;
 
+    public Animator telephoneAnimator;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,7 @@ public class Telephone : MonoBehaviour, Utilisable
         isRinging = false;
         isAnswering = false;
         timeToAnswer = Random.Range(10, 15 + 1);
+        telephoneAnimator = this.GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -30,6 +32,7 @@ public class Telephone : MonoBehaviour, Utilisable
     public void StartCall()
     {
         isRinging = true;
+        telephoneAnimator.SetBool("isRinging", isRinging);
         timeStartCall = Time.time;
         print("Gaston y a le telefon qui son");
     }
@@ -38,6 +41,7 @@ public class Telephone : MonoBehaviour, Utilisable
     {
         isAnswering = true;
         isRinging = false;
+        telephoneAnimator.SetBool("isRinging", isRinging);
         print("ALLO");
         // Doit appeler la fonction de discussion entre police et preneur d'otages
     }
@@ -47,6 +51,7 @@ public class Telephone : MonoBehaviour, Utilisable
         timeLastCall = Time.time;
         isAnswering = false;
         isRinging = false;
+        telephoneAnimator.SetBool("isRinging", isRinging);
         timeToAnswer = Random.Range(10, 15 + 1);
         print("o revoar");
     }

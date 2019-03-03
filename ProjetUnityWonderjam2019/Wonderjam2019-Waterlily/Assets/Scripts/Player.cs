@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
     {
         rigidbody = this.GetComponent<Rigidbody2D>();
         triggerUse = this.transform.Find("TriggerUse").GetComponent<TriggerUse>();
-
+        playerAnimator = this.GetComponentInChildren<Animator>();
     }
 
 
@@ -53,6 +53,7 @@ public class Player : MonoBehaviour
 
         else
         {
+            movementInput = Vector2.zero;
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 Answer();

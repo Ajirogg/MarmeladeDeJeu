@@ -29,20 +29,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("r"))
-        {
-            police.AugmenterAgressivite(10);
-            police.PrintPoliceTest();
-
-
-        }
-        else if (Input.GetKeyDown("r"))
-        {
-            police.DiminuerAgressivite(10);
-            police.PrintPoliceTest();
-        }
-
-
         if(telephone.timeLastCall + police.GetFrequenceAppel() <= Time.time && !telephone.isRinging && !telephone.isAnswering)
         {
             telephone.StartCall();

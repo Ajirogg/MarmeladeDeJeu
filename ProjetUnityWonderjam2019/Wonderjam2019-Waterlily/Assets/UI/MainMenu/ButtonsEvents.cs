@@ -17,8 +17,9 @@ public class ButtonsEvents : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1.0f;
         settingsActivated = false;
-        baseAlpha = GetComponent<CanvasGroup>().alpha;
+        baseAlpha = 0.75f;
     }
     private void Update()
     {
@@ -29,14 +30,14 @@ public class ButtonsEvents : MonoBehaviour
     }
     
     //Surbrillance
-    public void MouseEnter()
+    public void MouseEnter(GameObject obj)
     {
-        GetComponent<CanvasGroup>().alpha = targetAlpha;
+        obj.GetComponent<CanvasGroup>().alpha = targetAlpha;
     }
 
-    public void MouseExit()
+    public void MouseExit(GameObject obj)
     {
-        GetComponent<CanvasGroup>().alpha = baseAlpha;
+        obj.GetComponent<CanvasGroup>().alpha = baseAlpha;
     }
 
     //Gestion des Clics

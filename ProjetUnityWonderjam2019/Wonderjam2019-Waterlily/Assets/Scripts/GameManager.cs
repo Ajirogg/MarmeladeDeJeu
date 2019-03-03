@@ -81,7 +81,10 @@ public class GameManager : MonoBehaviour
         //GAME OVER
         if (police.etatPolice == 6 || police.agressivitePolice >= 100)
         {
-            throw new System.Exception("GAME OVER");
+            int score = ScoreManager.Instance.getScore();
+            float timePlayed = GameObject.Find("UI").transform.Find("ScoreCount").transform.Find("TimerPanel").transform.Find("Text").GetComponent<TimerScript>().TimeCount;
+            int hostagesAlive = gOtage1.nbOtage + gOtage2.nbOtage;
+            GameObject.Find("EndScreen").gameObject.GetComponent<EndGameManager>().LauchEndGame(score, timePlayed, hostagesAlive);
         }
 
 

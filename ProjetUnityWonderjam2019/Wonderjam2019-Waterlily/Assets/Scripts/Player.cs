@@ -68,10 +68,7 @@ public class Player : MonoBehaviour
         bool bonneReponse;
         GameObject.FindGameObjectWithTag("Question").GetComponent<QuestionManager>().Reponse(out indice, out bonneReponse);
         print(indice);
-
         GameObject.Find("GameManager").GetComponent<GameManager>().appliquerReponse(indice);
-
-
 
         talking = !bonneReponse;
     }

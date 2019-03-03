@@ -104,7 +104,7 @@ public class ListeQuestions
             new Reponse("Calmez-vous!", 50),
             new Reponse("Peut-etre", -25),
             new Reponse("Non", -50),
-            new Reponse("Quels otages?", -100),
+            new Reponse("JE SUIS UN GROUPE D'OTAGE", -100),
         };
 
         Question uneQuestion = new Question("Est-ce que les otages vont bien ?", uneListeReponses);
@@ -123,7 +123,7 @@ public class ListeQuestions
             new Reponse("Calmez-vous", 50),
             new Reponse("Peut-etre", -25),
             new Reponse("Non", -50),
-            new Reponse("Quels otages?", -100),
+            new Reponse("JE SUIS UN OTAGE SANS AMI", 666),
         };
 
         Question uneQuestion = new Question("Est-ce que les otages vont bien ?", uneListeReponses);

@@ -23,6 +23,8 @@ public class QuestionManager : MonoBehaviour
 
     public Utilisable stuff;
 
+    public bool shaking;
+
     // Start is called before the first frame update
     public void InitialiserQuestion(Question laQuestion_, int type, Utilisable stuff_) // 1 = Ordinateur / Autre = Bulles
     {
@@ -210,32 +212,37 @@ public class QuestionManager : MonoBehaviour
 
     IEnumerator ShakeQuestion(float shakeTime, float movementAmount)
     {
-
-        float startPositionX = goQuestion.transform.localPosition.x;
-        float rightPositionX = goQuestion.transform.localPosition.x + movementAmount;
-        float leftPositionX = goQuestion.transform.localPosition.x - movementAmount;
-
-        float y = 0;
-        for (float i = 0; i < shakeTime/4; i += Time.deltaTime)
+        if (!shaking)
         {
-            goQuestion.transform.localPosition  = Vector3.Lerp(new Vector3(startPositionX, goQuestion.transform.localPosition.y), new Vector3(rightPositionX, goQuestion.transform.localPosition.y), i/(shakeTime/4));
-            yield return null;
-        }
-        for (float i = 0; i < shakeTime/2; i += Time.deltaTime)
-        {
-            goQuestion.transform.localPosition = Vector3.Lerp(new Vector3(rightPositionX, goQuestion.transform.localPosition.y), new Vector3(leftPositionX, goQuestion.transform.localPosition.y), i / (shakeTime/2));
-            yield return null;
-        }
-        for (float i = 0; i < shakeTime/4; i += Time.deltaTime)
-        {
-            goQuestion.transform.localPosition = Vector3.Lerp(new Vector3(leftPositionX, goQuestion.transform.localPosition.y), new Vector3(startPositionX, goQuestion.transform.localPosition.y), i / (shakeTime/4));
-            yield return null;
-        }
+            shaking = true;
+            float startPositionX = goQuestion.transform.localPosition.x;
+            float rightPositionX = goQuestion.transform.localPosition.x + movementAmount;
+            float leftPositionX = goQuestion.transform.localPosition.x - movementAmount;
 
-        goQuestion.transform.localPosition = new Vector3(startPositionX, goQuestion.transform.localPosition.y);
+            float y = 0;
+            for (float i = 0; i < shakeTime / 4; i += Time.deltaTime)
+            {
+                goQuestion.transform.localPosition = Vector3.Lerp(new Vector3(startPositionX, goQuestion.transform.localPosition.y), new Vector3(rightPositionX, goQuestion.transform.localPosition.y), i / (shakeTime / 4));
+                yield return null;
+            }
+            for (float i = 0; i < shakeTime / 2; i += Time.deltaTime)
+            {
+                goQuestion.transform.localPosition = Vector3.Lerp(new Vector3(rightPositionX, goQuestion.transform.localPosition.y), new Vector3(leftPositionX, goQuestion.transform.localPosition.y), i / (shakeTime / 2));
+                yield return null;
+            }
+            for (float i = 0; i < shakeTime / 4; i += Time.deltaTime)
+            {
+                goQuestion.transform.localPosition = Vector3.Lerp(new Vector3(leftPositionX, goQuestion.transform.localPosition.y), new Vector3(startPositionX, goQuestion.transform.localPosition.y), i / (shakeTime / 4));
+                yield return null;
+            }
 
-        inputField.text = "";
-        inputField.Select();
-        inputField.ActivateInputField();
+            goQuestion.transform.localPosition = new Vector3(startPositionX, goQuestion.transform.localPosition.y);
+
+            inputField.text = "";
+            inputField.Select();
+            inputField.ActivateInputField();
+            shaking = false;
+        }
+        yield return null;
     }
 }

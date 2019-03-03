@@ -58,21 +58,35 @@ public class Otage : MonoBehaviour, Utilisable
     {
         int rand = Random.Range(1, ((100 / quitChance) + 1));
         print("Part ? = " + rand);
-        if (rand == 100 / quitChance) { 
+        if (rand == 100 / quitChance) {
+
+            GameObject.Find("GameManager").GetComponent<GameManager>().OtageLeave(this);
             Destroy(this.gameObject);
-            GetComponentInParent<GroupeOtage>().nbOtage -=1 ;
+            
         }
         lastStressRaise = Time.time;
     }
     public bool Use() //interface implementation
     {
-        throw new System.NotImplementedException();
-        return false;
+        talking = true;
+
+        GameManager gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+        gm.questionUI.GetComponent<QuestionManager>().readyToAnswer = true;
+        gm.questionUI.GetComponent<QuestionManager>().InitialiserQuestion(gm.laListeDesQuestions.GetRandomOtageIndividuel(), 0, this);
+
+        return true;
     }
 
     public void endCall()
     {
-        throw new System.NotImplementedException();
+        talking = false;
+    }
+
+    public GroupeOtage GetGroupeOtage()
+    {
+        GroupeOtage gro = this.GetComponentInParent<GroupeOtage>();
+        return gro;
     }
         
 }

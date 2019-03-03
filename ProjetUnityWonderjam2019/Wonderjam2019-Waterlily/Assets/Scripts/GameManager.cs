@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public Player player;
 
     public GameObject questionUI;
-    ListeQuestions laListeDesQuestions = new ListeQuestions();
+    public ListeQuestions laListeDesQuestions = new ListeQuestions();
 
     public float cooldownPoliceEnervement = 5.0f;
 
@@ -77,12 +77,8 @@ public class GameManager : MonoBehaviour
             questionUI.GetComponent<QuestionManager>().InitialiserQuestion(laListeDesQuestions.GetRandomPolice(),0, telephone);
         }
 
-
-
-
-
         //GAME OVER
-        if(police.etatPolice == 6 || police.agressivitePolice >= 100)
+        if (police.etatPolice == 6 || police.agressivitePolice >= 100)
         {
             throw new System.Exception("GAME OVER");
         }
@@ -105,6 +101,29 @@ public class GameManager : MonoBehaviour
         police.AugmenterAgressivite(-indice);
 
         print(police.agressivitePolice);
+    }
+
+    public void appliquerReponseOtage(int indice, Otage ota)
+    {
+        if (indice == 666)
+        {
+            foreach (Otage ots in ota.GetGroupeOtage().otages)
+            {
+                ots.PanicDecrease(150);
+            }
+            OtageLeave(ota);
+        }
+        else
+            ota.PanicDecrease(-indice);
+        
+    }
+
+    public void OtageLeave(Otage ota)
+    {
+        police.AugmenterAgressivite(5 * police.etatPolice);
+        print("L'otage est parti de jhonny haliday ");
+        ota.GetGroupeOtage().otages.Remove(ota);
+        Destroy(ota);
     }
 
 }

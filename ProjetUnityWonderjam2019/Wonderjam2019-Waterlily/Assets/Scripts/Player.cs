@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     Utilisable isTalkingTo;
 
     public bool talking = false;
+    bool isAnswering;
 
     public Animator playerAnimator;
 
@@ -24,7 +25,7 @@ public class Player : MonoBehaviour
     {
         rigidbody = this.GetComponent<Rigidbody2D>();
         triggerUse = this.transform.Find("TriggerUse").GetComponent<TriggerUse>();
-
+        playerAnimator = this.GetComponentInChildren<Animator>();
     }
 
 
@@ -53,7 +54,8 @@ public class Player : MonoBehaviour
 
         else
         {
-            if (Input.GetKeyDown(KeyCode.Return))
+            movementInput = Vector2.zero;
+            if (Input.GetKeyDown(KeyCode.Return) && !isAnswering)
             {
                 Answer();
             }
@@ -73,12 +75,18 @@ public class Player : MonoBehaviour
 
     private void Answer()
     {
-        bool bonneReponse;
-        GameObject.FindGameObjectWithTag("Question").GetComponent<QuestionManager>().Reponse(out indice, out bonneReponse);
-        //print(indice);
-        GameObject.Find("GameManager").GetComponent<GameManager>().appliquerReponse(indice, isTalkingTo);
+        bool bonneReponse = false;
+        isAnswering = true;
 
-        talking = !bonneReponse;
+        if (GameObject.FindGameObjectWithTag("Question") != null && GameObject.FindGameObjectWithTag("Question").GetComponent<QuestionManager>().readyToAnswer)
+        {
+                isAnswering = true;
+                GameObject.FindGameObjectWithTag("Question").GetComponent<QuestionManager>().Reponse(out indice, out bonneReponse);
+                if (bonneReponse)
+                    GameObject.Find("GameManager").GetComponent<GameManager>().appliquerReponse(indice, isTalkingTo);
+        }
+
+        isAnswering = false;
     }
 
     private void FixedUpdate()
@@ -93,7 +101,7 @@ public class Player : MonoBehaviour
 
         rigidbody.velocity = new Vector2(movementInput.x * runSpeed, movementInput.y * runSpeed);
 
-        //playerAnimator.SetFloat("Speed", rigidbody.velocity.magnitude);
+        playerAnimator.SetFloat("Speed", rigidbody.velocity.magnitude);
 
 
 

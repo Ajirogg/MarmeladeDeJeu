@@ -73,7 +73,8 @@ public class TriggerUse : MonoBehaviour
     {
         foreach(Otage o in u.otages)
         {
-            Glow(o.gameObject);
+            if(!o.hostageAnimator.GetBool("Died"))
+                Glow(o.gameObject);
         }
     }
 
@@ -111,6 +112,9 @@ public class TriggerUse : MonoBehaviour
 
         if (collider.gameObject.GetComponent<Utilisable>() != null)
         {
+            if (collider.gameObject.GetComponent<Otage>() != null && collider.gameObject.GetComponent<Otage>().hostageAnimator.GetBool("Died") == true)
+                return;
+
             ObjetsUtilisables.Add(collider.gameObject);
             curFirst = FirstObject();
         }

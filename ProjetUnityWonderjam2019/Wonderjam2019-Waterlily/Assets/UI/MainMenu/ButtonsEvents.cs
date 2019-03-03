@@ -51,6 +51,8 @@ public class ButtonsEvents : MonoBehaviour
 
             //On montre le panel de settings
             gameObject.transform.parent.parent.Find("SettingsMenu").gameObject.SetActive(true);
+            gameObject.transform.parent.parent.Find("SettingsMenu").gameObject.GetComponent<SettingsManagement>().DisplayCurrentSettings();
+            
         }
         else
         {

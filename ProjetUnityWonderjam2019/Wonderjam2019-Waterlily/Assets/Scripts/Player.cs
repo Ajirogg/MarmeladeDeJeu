@@ -5,59 +5,99 @@ public class Player : MonoBehaviour
 {
     float horizontal;
     float vertical;
+    Vector2 movementInput;
+    public int indice;
 
-    public float runSpeed = 10f;
+    public float runSpeed = 5f;
     public float rotationSpeed = 1f;
     Vector3 hitPoint;
     new Rigidbody2D rigidbody;
     TriggerUse triggerUse;
     float angle;
+    Utilisable isTalkingTo;
+
+    public bool talking = false;
+
+    public Animator playerAnimator;
 
     void Start()
     {
         rigidbody = this.GetComponent<Rigidbody2D>();
         triggerUse = this.transform.Find("TriggerUse").GetComponent<TriggerUse>();
-        
+
     }
 
-  
+
     void Update()
     {
-        horizontal = Input.GetAxis("Horizontal");
-        vertical = Input.GetAxis("Vertical");
-
-        if (Input.GetKeyDown(KeyCode.E))
+        if (!talking)
         {
-            Use();
+            horizontal = Input.GetAxis("Horizontal");
+            vertical = Input.GetAxis("Vertical");
+            movementInput = new Vector2(horizontal, vertical);
+
+            if (movementInput.magnitude > 1f)
+                movementInput = movementInput.normalized;
+
+
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                talking = Use();
+            }
+
+            if (rigidbody.velocity.sqrMagnitude > 1)
+            {
+                angle = Mathf.Atan2(movementInput.x, movementInput.y) * Mathf.Rad2Deg;
+            }
         }
 
-        if (rigidbody.velocity.sqrMagnitude > 5)
+        else
         {
-            angle = Mathf.Atan2(rigidbody.velocity.x, rigidbody.velocity.y) * Mathf.Rad2Deg;            
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                Answer();
+            }
+
         }
-        rigidbody.MoveRotation(-angle);
+
 
     }
 
-    private void Use()
+    private bool Use()
     {
-        triggerUse.FirstObject().GetComponent<Utilisable>().Use();           
+        if (triggerUse.FirstObject() == null)
+            return false;
+        isTalkingTo = triggerUse.FirstObject().GetComponent<Utilisable>() ;
+        return triggerUse.FirstObject().GetComponent<Utilisable>().Use();
+    }
+
+    private void Answer()
+    {
+        bool bonneReponse;
+        GameObject.FindGameObjectWithTag("Question").GetComponent<QuestionManager>().Reponse(out indice, out bonneReponse);
+        //print(indice);
+        GameObject.Find("GameManager").GetComponent<GameManager>().appliquerReponse(indice, isTalkingTo);
+
+        talking = !bonneReponse;
     }
 
     private void FixedUpdate()
     {
         Movement();
+        rigidbody.MoveRotation(-(int)angle);
     }
-    
+
 
     private void Movement()
     {
 
-        rigidbody.velocity = new Vector2(Mathf.Lerp(0, Input.GetAxis("Horizontal") * runSpeed, 0.8f),
-                                                 Mathf.Lerp(0, Input.GetAxis("Vertical") * runSpeed, 0.8f));
+        rigidbody.velocity = new Vector2(movementInput.x * runSpeed, movementInput.y * runSpeed);
+
+        playerAnimator.SetFloat("Speed", rigidbody.velocity.magnitude);
 
 
-        
+
+
 
 
         // Vector2 velocity = new Vector2(horizontal * speed, vertical * speed);

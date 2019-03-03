@@ -27,12 +27,18 @@ public class ComputerComponent : MonoBehaviour, Utilisable
     public float miningTickNumberToGrow = 4;
 
     public bool isTyping = false;
-    private SimpleSonarShader_Parent sonar;
+
+
+    private GameObject sonar;
     public void CreateRing()
     {
         if (sonar == null)
-            sonar = GameObject.FindObjectOfType<SimpleSonarShader_Parent>();
-        sonar.StartSonarRing(transform.position, 1);        
+            sonar = SonarMaster.CreateSonar(this.transform.position);
+    }
+    public void RemoveRing()
+    {
+        if (sonar != null)
+            Destroy(sonar);
     }
 
     /*Cycle de vie*/
@@ -48,10 +54,8 @@ public class ComputerComponent : MonoBehaviour, Utilisable
         failureCheckTickCount = 0;
         timeSinceLastFailureCheck = 0;
         currentMiningAmount = miningBaseAmount;
-        sonar = GameObject.FindObjectOfType<SimpleSonarShader_Parent>();
     }
-
-    private float ringCountdown = 1f;
+    
 
 
     void Update()
@@ -66,21 +70,23 @@ public class ComputerComponent : MonoBehaviour, Utilisable
         if (timeSinceLastMiningTick >= miningTickElapsingTime)
             MineTick();
 
+     
         if (!currentlyWorking)
-            ringCountdown -= Time.deltaTime;
-        else
-            return;
-
-        if (ringCountdown <= 0)
         {
-            ringCountdown = 1f;
             this.CreateRing();
+
         }
+        else
+        {
+            RemoveRing();
+            return;
+        }
+
 
     }
 
     /*Méthodes*/
-        //Gestion de l'activité
+    //Gestion de l'activité
     public bool IsCurrentlyworking()
     {
         return currentlyWorking;

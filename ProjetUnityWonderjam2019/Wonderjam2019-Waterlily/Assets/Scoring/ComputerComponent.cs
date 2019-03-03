@@ -116,8 +116,14 @@ public class ComputerComponent : MonoBehaviour, Utilisable
         if (minDelayBetweenFailures > timeSinceLastFailure)
             return;
 
-        //On éxécute le test
+        //On exécute le test
         failureCheckTickCount++;
+
+        //Si le joueur est en train d'utiliser le pc, on coupe le test mais on enregistre quand même la tentative de casse
+        if (isTyping)
+            return;
+
+        //On poursuit normalement le test
         float chanceOfFailurePerTick = maxChanceOfFailurePerTick / ((maxDelayForMaxChanceOfFailure - minDelayBetweenFailures) / failureCheckElapsingTime);
 
         float actualChanceOfFailure = failureCheckTickCount * chanceOfFailurePerTick;
@@ -135,6 +141,8 @@ public class ComputerComponent : MonoBehaviour, Utilisable
             
     }
 
+
+    //---------------------------------------
     public bool Use() //interface implementation
     {
         isTyping = true;

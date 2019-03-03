@@ -65,6 +65,7 @@ public class Otage : MonoBehaviour, Utilisable
 
             GameObject.Find("GameManager").GetComponent<GameManager>().OtageLeave(this);
             Destroy(this.gameObject);
+
             
         }
         lastStressRaise = Time.time;

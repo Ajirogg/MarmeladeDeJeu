@@ -4306,6 +4306,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7799772133341736706, guid: e34743a5e8a72cf41b9bda045ac59d4a,
+        type: 3}
+      propertyPath: m_Name
+      value: SoundManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799772133341736706, guid: e34743a5e8a72cf41b9bda045ac59d4a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2162821815311875108, guid: e34743a5e8a72cf41b9bda045ac59d4a,
         type: 3}
       propertyPath: maxEfxSirene
@@ -4376,16 +4386,6 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: c00f96754d0ad2544847fe22abcda813, type: 3}
-    - target: {fileID: 7799772133341736706, guid: e34743a5e8a72cf41b9bda045ac59d4a,
-        type: 3}
-      propertyPath: m_Name
-      value: SoundManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 7799772133341736706, guid: e34743a5e8a72cf41b9bda045ac59d4a,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e34743a5e8a72cf41b9bda045ac59d4a, type: 3}
 --- !u!1001 &684519311

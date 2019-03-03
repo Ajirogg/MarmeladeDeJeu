@@ -30,6 +30,7 @@ public class SettingsManagement : MonoBehaviour
     {
         opM.SetVolumeFX(sliderVFX.value);
         opM.SetVolumeMusic(sliderMusic.value);
+        SoundManager.instance.initialiserVolume();
         //opM.SetKeyboardType((OptionsManager.keyboard_type)dropDownKeyboardType.value);
     }
 }

@@ -54,6 +54,9 @@ public class TriggerUse : MonoBehaviour
             return;
         }
 
+        if (u.GetComponentInChildren<SpriteRenderer>() != null) //Recupere le GO où il y a le sprite
+            u = u.GetComponentInChildren<SpriteRenderer>().gameObject;
+
 
         if (u.gameObject.GetComponent<SpriteGlow.SpriteGlowEffect>() != null)
         {

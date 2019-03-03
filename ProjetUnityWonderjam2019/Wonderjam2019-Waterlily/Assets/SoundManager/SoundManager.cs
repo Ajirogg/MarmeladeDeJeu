@@ -42,4 +42,13 @@ public class SoundManager : MonoBehaviour
         efxExterieur.volume = OptionsManager.Instance.GetVolumeFX() * maxEfxExterieur;
         efxSonnerie.volume = OptionsManager.Instance.GetVolumeFX() * maxEfxSonnerie;
     }
+    public void muteVolume()
+    {
+        musicSource.volume = 0;
+        efxDialogue.volume = 0;
+        efxSirene.volume = 0;
+        efxExterieur.volume = 0;
+        efxSonnerie.volume = 0;
+    }
+
 }

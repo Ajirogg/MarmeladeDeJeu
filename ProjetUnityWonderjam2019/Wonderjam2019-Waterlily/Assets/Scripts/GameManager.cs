@@ -43,12 +43,12 @@ public class GameManager : MonoBehaviour
         }
 
 
-        if(telephone.timeLastCall + /*police.GetFrequenceAppel()*/ 10 <= Time.time && !telephone.isRinging && !telephone.isAnswering)
+        if(telephone.timeLastCall + police.GetFrequenceAppel() <= Time.time && !telephone.isRinging && !telephone.isAnswering)
         {
             telephone.StartCall();
-            
+
         }
-               
+
 
         if (Time.time >= telephone.timeToAnswer + telephone.timeStartCall && telephone.isRinging)
         {
@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
 
     public void appliquerReponse(int indice, Utilisable obj)
     {
-        if (obj.GetType() == telephone.GetType()) { 
+        if (obj.GetType() == telephone.GetType()) {
             appliquerReponsePolice(indice);
             print("HOP la réponse est appliquée à la police");
         }
@@ -103,7 +103,7 @@ public class GameManager : MonoBehaviour
         {
             appliquerReponseGroupeOtage(indice, (GroupeOtage)obj);
             print("HOP la réponse est appliquée à un groupe d'otage");
-        } 
+        }
         else if (obj.GetType() == ordinateur.GetType())
         {
             appliquerReponseOrdinateur(indice);
@@ -141,6 +141,7 @@ public class GameManager : MonoBehaviour
             SoundManager.instance.efxDialogue.Play();
             SoundManager.instance.efxExterieur.clip = ambulance;
             SoundManager.instance.efxExterieur.PlayDelayed(5);
+            ota.Dying();
             OtageLeave(ota);
         }
         else if (indice > 0)
@@ -149,8 +150,8 @@ public class GameManager : MonoBehaviour
         }
         else
             ota.PanicRaise(-indice);
-            
-        
+
+
     }
 
     public void appliquerReponseGroupeOtage(int indice, GroupeOtage go)
@@ -174,15 +175,13 @@ public class GameManager : MonoBehaviour
         }
         else
             ordinateur.SwitchOn();
-        
+
     }
     public void OtageLeave(Otage ota)
     {
-        police.augmenterEtat();
-        print("L'otage est partis de jhonny haliday ");
+        police.AugmenterAgressivite(5 * police.etatPolice);
         ota.GetGroupeOtage().otages.Remove(ota);
         ota.GetGroupeOtage().subtractYelling();
-        Destroy(ota.gameObject);
     }
 
 }

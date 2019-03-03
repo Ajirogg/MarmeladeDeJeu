@@ -23,12 +23,12 @@ public class Otage : MonoBehaviour, Utilisable
     // Update is called once per frame
     void Update()
     {
-        if (lastStressRaise + stressPeriod <= Time.time && !talking) { 
-            if (panic < maxPanic) { 
+        if (lastStressRaise + stressPeriod <= Time.time && !talking) {
+            if (panic < maxPanic) {
                 int raise = Random.Range(1, maxStressRaise + 1);
                 PanicRaise(raise);
             }
-            else 
+            else
             {
                 RandQuit();
             }
@@ -37,7 +37,7 @@ public class Otage : MonoBehaviour, Utilisable
 
     public void PanicRaise(int raise)
     {
-        
+
         panic += raise;
         lastStressRaise = Time.time;
 
@@ -50,12 +50,12 @@ public class Otage : MonoBehaviour, Utilisable
 
         if (panic > maxPanic)
             panic = maxPanic;
-        
+
     }
     public void PanicDecrease(int decrease)
     {
         panic -= decrease ;
-        if (isYelling & panic < maxPanic/2) { 
+        if (isYelling & panic < maxPanic/2) {
             isYelling = false;
             hostageAnimator.SetBool("Yelling", isYelling);
             GetGroupeOtage().subtractYelling();
@@ -103,5 +103,5 @@ public class Otage : MonoBehaviour, Utilisable
         GroupeOtage gro = this.GetComponentInParent<GroupeOtage>();
         return gro;
     }
-        
+
 }

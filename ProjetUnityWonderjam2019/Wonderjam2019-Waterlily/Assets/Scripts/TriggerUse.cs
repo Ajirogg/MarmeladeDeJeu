@@ -73,7 +73,8 @@ public class TriggerUse : MonoBehaviour
     {
         foreach(Otage o in u.otages)
         {
-            Glow(o.gameObject);
+            if(!o.hostageAnimator.GetBool("Died"))
+                Glow(o.gameObject);
         }
     }
 

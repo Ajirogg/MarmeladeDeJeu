@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   otage: {fileID: 3584567435368976493, guid: 5ef8f6e280959b5428f427823a909808, type: 3}
-  nbOtage: 3
+  nbOtage: 2
   nbYelling: 0
   otages: []
   raiseYelling: 6

@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
     public Police police;
     public GroupeOtage gOtage1;
     public GroupeOtage gOtage2;
-    public GroupeOtage gOtage3;
     public Telephone telephone;
     public ComputerComponent ordinateur;
     public Player player;
@@ -70,7 +69,7 @@ public class GameManager : MonoBehaviour
         {
             int score = ScoreManager.Instance.getScore();
             float timePlayed = GameObject.Find("UI").transform.Find("ScoreCount").transform.Find("TimerPanel").transform.Find("Text").GetComponent<TimerScript>().TimeCount;
-            int hostagesAlive = gOtage1.nbOtage + gOtage2.nbOtage;
+            int hostagesAlive = gOtage1.otages.Count + gOtage2.otages.Count;
             GameObject.Find("EndScreen").gameObject.GetComponent<EndGameManager>().LauchEndGame(score, timePlayed, hostagesAlive);
         }
 
@@ -126,12 +125,16 @@ public class GameManager : MonoBehaviour
                 ots.PanicDecrease(150);
             }
 
+            police.augmenterEtat();
+            police.AugmenterAgressivite(35);
             SoundManager.instance.efxDialogue.clip = tir;
             SoundManager.instance.efxDialogue.Play();
             SoundManager.instance.efxExterieur.clip = ambulance;
             SoundManager.instance.efxExterieur.PlayDelayed(5);
+            ota.GetGroupeOtage().otages.Remove(ota);
+            ota.GetGroupeOtage().subtractYelling();
             ota.Dying();
-            OtageLeave(ota);
+            
         }
         else if (indice > 0)
         {

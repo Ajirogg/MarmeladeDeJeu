@@ -23,15 +23,7 @@ public class TriggerUse : MonoBehaviour
 
     public  GameObject FirstObject()
     {
-        GameObject toReturn = ObjetsUtilisables.ToList()[0];
-        foreach (GameObject ob in objetsUtilisables)
-        {            
-            if (ob.GetComponent<GroupeOtage>() != null)
-                toReturn = ob;
-            else if (ob.GetComponent<Otage>() != null)
-                return ob;
-        }
-        return toReturn;
+        return ObjetsUtilisables.ToList()[0];
     } 
 
     private void OnTriggerEnter2D(Collider2D collider)

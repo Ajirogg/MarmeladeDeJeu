@@ -32,8 +32,10 @@ public class InGameSettingsButtonsMenu : MonoBehaviour
     //Gestion des Clics
     public void HomeClick()
     {
-        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+        ScoreManager.Instance.ResetScore();
         SoundManager.instance.musicSource.Stop();
+        SoundManager.instance.stopAllEFX();
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 
     public void BackClick()
@@ -47,7 +49,10 @@ public class InGameSettingsButtonsMenu : MonoBehaviour
         settingsActivated = true;
 
         gameObject.GetComponent<SettingsManagement>().DisplayCurrentSettings();
-        
+
+        //On met en pause les VFX
+        SoundManager.instance.pauseAllEFX();
+
         //On affiche le canvas des settings
         gameObject.transform.Find("MainFrame").gameObject.SetActive(true);
         gameObject.transform.Find("Blur").gameObject.SetActive(true);
@@ -61,6 +66,9 @@ public class InGameSettingsButtonsMenu : MonoBehaviour
     private void Close()
     {
         settingsActivated = false;
+
+        //On resume les VFX
+        SoundManager.instance.resumeAllEFX();
 
         //On cache le canvas des settings
         gameObject.transform.Find("MainFrame").gameObject.SetActive(false);

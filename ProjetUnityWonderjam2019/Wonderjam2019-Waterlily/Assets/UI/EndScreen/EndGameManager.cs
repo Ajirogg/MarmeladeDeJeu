@@ -17,6 +17,9 @@ public class EndGameManager : MonoBehaviour
         m_playTime = playtime;
         m_hostagesAlive = hostagesAlive;
 
+        //On stop tout les EFX
+        SoundManager.instance.stopAllEFX();
+
         //On affiche les infos
         gameObject.transform.Find("Panel").Find("Content").Find("TimePanel").Find("AmountText").GetComponent<Text>().text = ((int) (m_playTime / 60f)) + " minutes " + ((int) (m_playTime % 60f)) + " secondes";
         gameObject.transform.Find("Panel").Find("Content").Find("MoneyPanel").Find("AmountText").GetComponent<Text>().text = m_score + "$";
@@ -33,8 +36,9 @@ public class EndGameManager : MonoBehaviour
 
     public void HomeClick()
     {
+        ScoreManager.Instance.ResetScore();
+        SoundManager.instance.musicSource.Stop(); //On stop la musique
         Time.timeScale = 1.0f;
-        SoundManager.instance.musicSource.Stop();
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 

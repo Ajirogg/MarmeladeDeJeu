@@ -51,4 +51,27 @@ public class SoundManager : MonoBehaviour
         efxSonnerie.volume = 0;
     }
 
+    public void pauseAllEFX()
+    {
+        efxSonnerie.Pause();
+        efxDialogue.Pause();
+        efxSirene.Pause();
+        efxExterieur.Pause();
+    }
+
+    public void resumeAllEFX()
+    {
+        efxSonnerie.UnPause();
+        efxDialogue.UnPause();
+        efxSirene.UnPause();
+        efxExterieur.UnPause();
+    }
+
+    public void stopAllEFX()
+    {
+        efxSonnerie.Stop();
+        efxDialogue.Stop();
+        efxSirene.Stop();
+        efxExterieur.Stop();
+    }
 }

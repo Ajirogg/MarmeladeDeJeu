@@ -43,6 +43,7 @@ public class ButtonsEvents : MonoBehaviour
     //Gestion des Clics
     public void PlayClick()
     {
+        SoundManager.instance.musicSource.Stop(); //On stop la musique actuelle
         SceneManager.LoadScene("MainScene", LoadSceneMode.Single);
     }
 
@@ -68,6 +69,9 @@ public class ButtonsEvents : MonoBehaviour
     {
         settingsActivated = true;
 
+        //On met en pause les VFX
+        SoundManager.instance.pauseAllEFX();
+
         //On cache le middlepanel
         gameObject.transform.Find("MiddlePanel").gameObject.SetActive(false);
 
@@ -82,6 +86,9 @@ public class ButtonsEvents : MonoBehaviour
     private void Close()
     {
         settingsActivated = false;
+
+        //On resume les VFX
+        SoundManager.instance.resumeAllEFX();
 
         //On montre le middlepanel
         gameObject.transform.Find("MiddlePanel").gameObject.SetActive(true);

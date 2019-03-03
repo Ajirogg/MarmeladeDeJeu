@@ -144,7 +144,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: cce7c61aaf746904ea8143126963a271, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.05
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -535,7 +535,7 @@ MonoBehaviour:
   musicSource: {fileID: 6843322765539530442}
   maxEfxSonnerie: 0.2
   maxEfxDialogue: 1
-  maxEfxSirene: 0.05
+  maxEfxSirene: 0.2
   maxEfxExterieur: 0.2
   maxMusicSource: 0.6
   lowPitchRange: 0.95

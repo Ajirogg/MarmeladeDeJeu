@@ -39,4 +39,9 @@ public class ScoreManager : Singleton<ScoreManager>
         if (amoutToSub > 0)
             setScore(getScore() - amoutToSub);
     }*/
+
+    public void ResetScore()
+    {
+        m_score = 0;
+    }
 }

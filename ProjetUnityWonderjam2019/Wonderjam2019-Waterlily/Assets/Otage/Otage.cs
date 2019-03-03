@@ -20,7 +20,6 @@ public class Otage : MonoBehaviour, Utilisable
     {
         lastStressRaise = Time.time ;
         sonar = GameObject.FindObjectsOfType<SimpleSonarShader_Object>(); 
-        this.CreateRing();
     }
 
     public void CreateRing()
@@ -32,6 +31,7 @@ public class Otage : MonoBehaviour, Utilisable
     }
 
     // Update is called once per frame
+    private float ringCountdown = 0.8f;
     void Update()
     {
         if (lastStressRaise + stressPeriod <= Time.time && !talking) {
@@ -44,6 +44,18 @@ public class Otage : MonoBehaviour, Utilisable
                 RandQuit();
             }
         }
+
+        if (isYelling)
+            ringCountdown -= Time.deltaTime;
+        else
+            return;
+
+        if (ringCountdown <= 0)
+        {
+            ringCountdown = 0.8f;
+            this.CreateRing();
+        }
+
     }
 
     public void PanicRaise(int raise)

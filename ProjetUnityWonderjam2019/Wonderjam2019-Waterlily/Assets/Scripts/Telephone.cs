@@ -25,7 +25,6 @@ public class Telephone : MonoBehaviour, Utilisable
         timeToAnswer = Random.Range(5, 10 + 1);
         telephoneAnimator = this.GetComponentInChildren<Animator>();
         sonar = GameObject.FindObjectsOfType<SimpleSonarShader_Object>();
-        this.CreateRing();
     }
 
     public void CreateRing()
@@ -36,8 +35,19 @@ public class Telephone : MonoBehaviour, Utilisable
         }
     }
     // Update is called once per frame
+
+    private float ringCountdown = 0.5f;
     void Update()
     {
+        if (isRinging)
+            ringCountdown -= Time.deltaTime;
+        else
+            return; 
+
+        if (ringCountdown <=0 ){
+            ringCountdown = 0.5f;
+            this.CreateRing();
+        }
 
     }
 

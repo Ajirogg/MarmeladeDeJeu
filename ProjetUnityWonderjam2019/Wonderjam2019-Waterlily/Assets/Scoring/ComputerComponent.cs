@@ -50,8 +50,10 @@ public class ComputerComponent : MonoBehaviour, Utilisable
         timeSinceLastFailureCheck = 0;
         currentMiningAmount = miningBaseAmount;
         sonar = GameObject.FindObjectsOfType<SimpleSonarShader_Object>();
-        this.CreateRing();
     }
+
+    private float ringCountdown = 1f;
+
 
     void Update()
     {
@@ -64,6 +66,18 @@ public class ComputerComponent : MonoBehaviour, Utilisable
             FailureCheck();
         if (timeSinceLastMiningTick >= miningTickElapsingTime)
             MineTick();
+
+        if (!currentlyWorking)
+            ringCountdown -= Time.deltaTime;
+        else
+            return;
+
+        if (ringCountdown <= 0)
+        {
+            ringCountdown = 1f;
+            this.CreateRing();
+        }
+
     }
 
     /*Méthodes*/

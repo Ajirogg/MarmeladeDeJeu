@@ -27,7 +27,14 @@ public class ComputerComponent : MonoBehaviour, Utilisable
     public float miningTickNumberToGrow = 4;
 
     public bool isTyping = false;
-
+    private SimpleSonarShader_Object[] sonar;
+    public void CreateRing()
+    {
+        foreach (SimpleSonarShader_Object o in sonar)
+        {
+            o.StartSonarRing(transform.position, 1);
+        }
+    }
 
     /*Cycle de vie*/
     void Start()
@@ -42,6 +49,8 @@ public class ComputerComponent : MonoBehaviour, Utilisable
         failureCheckTickCount = 0;
         timeSinceLastFailureCheck = 0;
         currentMiningAmount = miningBaseAmount;
+        sonar = GameObject.FindObjectsOfType<SimpleSonarShader_Object>();
+        this.CreateRing();
     }
 
     void Update()

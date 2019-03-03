@@ -12,4 +12,10 @@ public class SimpleSonarShader_ExampleCollision : MonoBehaviour
         SimpleSonarShader_Parent parent = GetComponentInParent<SimpleSonarShader_Parent>();
         if (parent) parent.StartSonarRing(collision.contacts[0].point, collision.impulse.magnitude / 10.0f);
     }
+
+    public void StartSonarRing(Vector3 p, float i)
+    {
+        SimpleSonarShader_Parent parent = GetComponentInParent<SimpleSonarShader_Parent>();
+        if (parent) parent.StartSonarRing(p, i);
+    }
 }

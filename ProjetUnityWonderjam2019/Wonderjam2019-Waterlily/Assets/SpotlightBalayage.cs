@@ -28,7 +28,7 @@ public class SpotlightBalayage : MonoBehaviour
             direction = -direction;
         }
 
-        this.GetComponent<Light>().intensity = 5 * (float)police.agressivitePolice/100;
+        this.GetComponent<Light>().intensity = 1 + 7.5f * (float)police.agressivitePolice/100;
             
     }
     

@@ -12,15 +12,25 @@ public class Otage : MonoBehaviour, Utilisable
     public int maxStressRaise = 10;
     public int maxPanic = 200;
     public bool talking = false;
-
+    
     public Animator hostageAnimator;
 
     private void Start()
     {
-        lastStressRaise = Time.time ;
+        lastStressRaise = Time.time;
+        if (sonar == null)
+            sonar = GameObject.FindObjectOfType<InitSonar>().GetSonar();
+        sonar = GameObject.FindObjectOfType<InitSonar>().GetSonar();
+    }
+
+    private SimpleSonarShader_Object sonar;
+    public void CreateRing()
+    {
+        sonar.StartSonarRing(transform.position, 1);
     }
 
     // Update is called once per frame
+    private float ringCountdown = 0.8f;
     void Update()
     {
         if (lastStressRaise + stressPeriod <= Time.time && !talking) {
@@ -33,6 +43,18 @@ public class Otage : MonoBehaviour, Utilisable
                 RandQuit();
             }
         }
+
+        if (isYelling)
+            ringCountdown -= Time.deltaTime;
+        else
+            return;
+
+        if (ringCountdown <= 0)
+        {
+            ringCountdown = 0.8f;
+            this.CreateRing();
+        }
+
     }
 
     public void PanicRaise(int raise)
@@ -60,6 +82,8 @@ public class Otage : MonoBehaviour, Utilisable
             hostageAnimator.SetBool("Yelling", isYelling);
             GetGroupeOtage().subtractYelling();
         }
+        if (panic < 0)
+            panic = 0;
     }
     public void RandQuit()
     {
@@ -78,9 +102,10 @@ public class Otage : MonoBehaviour, Utilisable
     }
     public void Dying()
     {
-        hostageAnimator.SetBool("Died", true);
+        hostageAnimator.SetBool("Dead", true);
         this.gameObject.GetComponent<CircleCollider2D>().enabled = false;
         this.gameObject.GetComponent<Otage>().enabled = false;
+        
     }
     public bool Use() //interface implementation
     {

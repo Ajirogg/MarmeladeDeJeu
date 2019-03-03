@@ -73,13 +73,16 @@ public class TriggerUse : MonoBehaviour
     {
         foreach(Otage o in u.otages)
         {
-            Glow(o.gameObject);
+                Glow(o.gameObject);
         }
     }
 
 
-    void unGlowAll(HashSet<GameObject> set)
+    public void unGlowAll(HashSet<GameObject> set = null)
     {
+        if (set == null)
+            set = ObjetsUtilisables;
+
         var b = GameObject.FindObjectsOfType<MonoBehaviour>();
 
         foreach(MonoBehaviour ob in b)

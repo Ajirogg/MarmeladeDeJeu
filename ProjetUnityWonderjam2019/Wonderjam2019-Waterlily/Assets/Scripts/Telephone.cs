@@ -14,20 +14,41 @@ public class Telephone : MonoBehaviour, Utilisable
     public float timeLastCall;
 
     public Animator telephoneAnimator;
-
+    
     // Start is called before the first frame update
     void Start()
     {
         timeLastCall = Time.time;
         isRinging = false;
         isAnswering = false;
-        timeToAnswer = Random.Range(5, 10 + 1);
+        timeToAnswer = Random.Range(8, 15 + 1);
         telephoneAnimator = this.GetComponentInChildren<Animator>();
+
+        sonar = GameObject.FindObjectOfType<InitSonar>().GetSonar();
     }
 
+    private SimpleSonarShader_Object sonar;
+    public void CreateRing()
+    {
+        if(sonar == null)
+            sonar = GameObject.FindObjectOfType<InitSonar>().GetSonar();
+
+        sonar.StartSonarRing(transform.position, 1);
+    }
     // Update is called once per frame
+
+    private float ringCountdown = 0.5f;
     void Update()
     {
+        if (isRinging)
+            ringCountdown -= Time.deltaTime;
+        else
+            return; 
+
+        if (ringCountdown <=0 ){
+            ringCountdown = 0.5f;
+            this.CreateRing();
+        }
 
     }
 
@@ -48,16 +69,19 @@ public class Telephone : MonoBehaviour, Utilisable
         isAnswering = true;
         isRinging = false;
         telephoneAnimator.SetBool("isRinging", isRinging);
+        GameManager gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gm.questionUI.GetComponent<QuestionManager>().readyToAnswer = true;
+        gm.questionUI.GetComponent<QuestionManager>().InitialiserQuestion(gm.laListeDesQuestions.GetRandomPolice(), 0, gm.telephone);
         // Doit appeler la fonction de discussion entre police et preneur d'otages
     }
 
     public void endCall()
     {
-        timeLastCall = Time.time;
         isAnswering = false;
         isRinging = false;
+        timeLastCall = Time.time;
         telephoneAnimator.SetBool("isRinging", isRinging);
-        timeToAnswer = Random.Range(5, 10 + 1);
+        timeToAnswer = Random.Range(8, 15 + 1);
     }
 
     public bool Use()

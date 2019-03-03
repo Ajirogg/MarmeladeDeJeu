@@ -21,10 +21,10 @@ public class Player : MonoBehaviour
     {
         rigidbody = this.GetComponent<Rigidbody2D>();
         triggerUse = this.transform.Find("TriggerUse").GetComponent<TriggerUse>();
-
+        
     }
 
-
+  
     void Update()
     {
         if (!talking)
@@ -43,7 +43,6 @@ public class Player : MonoBehaviour
             }
             rigidbody.MoveRotation(-angle);
         }
-
         else
         {
             if (Input.GetKeyDown(KeyCode.Return))
@@ -53,14 +52,13 @@ public class Player : MonoBehaviour
 
         }
 
-
     }
 
     private bool Use()
     {
         if (triggerUse.FirstObject() == null)
             return false;
-        return triggerUse.FirstObject().GetComponent<Utilisable>().Use();
+        return triggerUse.FirstObject().GetComponent<Utilisable>().Use();           
     }
 
     private void Answer()
@@ -79,9 +77,8 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         Movement();
-        rigidbody.MoveRotation((-(int)angle / 90)*90);
     }
-
+    
 
     private void Movement()
     {
@@ -90,7 +87,7 @@ public class Player : MonoBehaviour
                                                  Mathf.Lerp(0, vertical * runSpeed, 0.8f));
 
 
-
+        
 
 
         // Vector2 velocity = new Vector2(horizontal * speed, vertical * speed);

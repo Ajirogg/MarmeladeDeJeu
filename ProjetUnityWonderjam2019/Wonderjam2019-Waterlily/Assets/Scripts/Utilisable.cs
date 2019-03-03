@@ -4,5 +4,7 @@ using UnityEngine;
 
 public interface Utilisable
 {
-    void Use();
+    bool Use();
+
+    void endCall();
 }

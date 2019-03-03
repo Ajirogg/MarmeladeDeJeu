@@ -5,9 +5,8 @@ using UnityEngine;
 public class Police : MonoBehaviour
 {
 
-    private int etatPolice;         // Enum de l'etat de la police de 1 à 5
-   // private int barreEtatPolice;    // Barre progressante permettant le changement d'état de 0 à 50
-    private int agressivitePolice;  // Barre de progression de l'agressivité de la police 100 = défaite
+    public int etatPolice;         // Enum de l'etat de la police de 1 à 5
+    public int agressivitePolice;  // Barre de progression de l'agressivité de la police 100 = défaite
     public int frequenceAppel = 60; // Fréquence en seconde d'appel de la police
     public int frequenceAppelMinimum = 60; // Fréquence en seconde d'appel de la police
 
@@ -27,6 +26,11 @@ public class Police : MonoBehaviour
      
     }
 
+    public void augmenterEtat()
+    {
+        etatPolice++;
+    }
+
     public void PrintPoliceTest()
     {
         Debug.Log(agressivitePolice);
@@ -38,11 +42,9 @@ public class Police : MonoBehaviour
     public void AugmenterAgressivite(int value)
     {
         agressivitePolice += value;
-        if(agressivitePolice >= etatPolice * 20)
-        {
-            ++etatPolice;
-            frequenceAppel = frequenceAppelMinimum - (frequenceAppelMinimum * etatPolice * 10 / 100);
-        }
+        if (agressivitePolice < 0)
+            agressivitePolice = 0;
+        frequenceAppel = frequenceAppelMinimum - (frequenceAppelMinimum * etatPolice * 10 / 100);
     }
 
     public void DiminuerAgressivite(int value)

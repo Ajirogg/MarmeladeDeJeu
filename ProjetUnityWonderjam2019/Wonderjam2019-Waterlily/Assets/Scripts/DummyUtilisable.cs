@@ -18,7 +18,13 @@ public class DummyUtilisable : MonoBehaviour, Utilisable
         
     }
 
-    void Utilisable.Use()
+    bool Utilisable.Use()
+    {
+        throw new System.NotImplementedException();
+        return false;
+    }
+
+    public void endCall()
     {
         throw new System.NotImplementedException();
     }

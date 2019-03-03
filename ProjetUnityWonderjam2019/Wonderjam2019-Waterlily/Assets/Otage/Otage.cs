@@ -22,8 +22,10 @@ public class Otage : MonoBehaviour, Utilisable
     void Update()
     {
         if (lastStressRaise + stressPeriod <= Time.time && !talking) { 
-            if (panic < maxPanic)
-                PanicRaise();
+            if (panic < maxPanic) { 
+                int raise = Random.Range(1, maxStressRaise + 1);
+                PanicRaise(raise);
+            }
             else 
             {
                 RandQuit();
@@ -31,10 +33,9 @@ public class Otage : MonoBehaviour, Utilisable
         }
     }
 
-    public void PanicRaise()
+    public void PanicRaise(int raise)
     {
-        int raise = Random.Range(1, maxStressRaise + 1);
-        print("Augementation + " + raise);
+        
         panic += raise;
         lastStressRaise = Time.time;
 
@@ -51,8 +52,10 @@ public class Otage : MonoBehaviour, Utilisable
     public void PanicDecrease(int decrease)
     {
         panic -= decrease ;
-        if (isYelling & panic < maxPanic/2)
+        if (isYelling & panic < maxPanic/2) { 
             isYelling = false;
+            GetGroupeOtage().subtractYelling();
+        }
     }
     public void RandQuit()
     {
@@ -68,7 +71,6 @@ public class Otage : MonoBehaviour, Utilisable
     }
     public bool Use() //interface implementation
     {
-        talking = true;
 
         GameManager gm = GameObject.Find("GameManager").GetComponent<GameManager>();
 

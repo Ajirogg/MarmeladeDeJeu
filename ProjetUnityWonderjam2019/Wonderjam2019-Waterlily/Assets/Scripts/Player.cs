@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     new Rigidbody2D rigidbody;
     TriggerUse triggerUse;
     float angle;
+    Utilisable isTalkingTo;
 
     public bool talking = false;
 
@@ -60,6 +61,7 @@ public class Player : MonoBehaviour
     {
         if (triggerUse.FirstObject() == null)
             return false;
+        isTalkingTo = triggerUse.FirstObject().GetComponent<Utilisable>() ;
         return triggerUse.FirstObject().GetComponent<Utilisable>().Use();
     }
 
@@ -67,8 +69,8 @@ public class Player : MonoBehaviour
     {
         bool bonneReponse;
         GameObject.FindGameObjectWithTag("Question").GetComponent<QuestionManager>().Reponse(out indice, out bonneReponse);
-        print(indice);
-        GameObject.Find("GameManager").GetComponent<GameManager>().appliquerReponse(indice);
+        //print(indice);
+        GameObject.Find("GameManager").GetComponent<GameManager>().appliquerReponse(indice, isTalkingTo);
 
         talking = !bonneReponse;
     }

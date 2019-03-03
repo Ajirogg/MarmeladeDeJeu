@@ -65,8 +65,7 @@ public class GameManager : MonoBehaviour
             if(cooldownPoliceEnervement <= 0)
             {
                 police.AugmenterAgressivite(police.etatPolice);
-                print("enervement");
-                police.PrintPoliceTest();
+                //police.PrintPoliceTest();
                 cooldownPoliceEnervement = 5.0f;
             }
         }
@@ -86,16 +85,31 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void appliquerReponse(int indice)
+    public void appliquerReponse(int indice, Utilisable obj)
     {
-        if(indice < 0)
+        if (obj.GetType() == telephone.GetType()) { 
+            appliquerReponsePolice(indice);
+            print("HOP la réponse est appliquée à la police");
+        }
+        else if (obj.GetType() == FindObjectOfType<Otage>().GetType())
+        {
+            appliquerReponseOtage(indice, (Otage)obj);
+            print("HOP la réponse est appliquée à l'otage");
+        }
+            
+            
+    }
+
+    public void appliquerReponsePolice(int indice)
+    {
+        if (indice < 0)
         {
             indice = indice * (25 * police.etatPolice) / 100;
         }
         else
         {
             indice = indice * (25 * (6 - police.etatPolice)) / 100;
-            
+
         }
 
         police.AugmenterAgressivite(-indice);
@@ -113,17 +127,23 @@ public class GameManager : MonoBehaviour
             }
             OtageLeave(ota);
         }
+        else if (indice > 0)
+        {
+            ota.PanicDecrease(indice);
+        }
         else
-            ota.PanicDecrease(-indice);
+            ota.PanicRaise(-indice);
+            
         
     }
 
     public void OtageLeave(Otage ota)
     {
         police.AugmenterAgressivite(5 * police.etatPolice);
-        print("L'otage est parti de jhonny haliday ");
+        print("L'otage est partis de jhonny haliday ");
         ota.GetGroupeOtage().otages.Remove(ota);
-        Destroy(ota);
+        ota.GetGroupeOtage().subtractYelling();
+        Destroy(ota.gameObject);
     }
 
 }

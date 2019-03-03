@@ -92,7 +92,7 @@ public class QuestionManager : MonoBehaviour
     {
         string laReponse_;
         laReponse_ = inputField.text;
-        Debug.Log("Une réponse a été faites: " + laReponse_);
+        //Debug.Log("Une réponse a été faites: " + laReponse_);
 
         indiceRetour = 0;
         bienRepondu = false;
@@ -219,7 +219,6 @@ public class QuestionManager : MonoBehaviour
             float rightPositionX = goQuestion.transform.localPosition.x + movementAmount;
             float leftPositionX = goQuestion.transform.localPosition.x - movementAmount;
 
-            float y = 0;
             for (float i = 0; i < shakeTime / 4; i += Time.deltaTime)
             {
                 goQuestion.transform.localPosition = Vector3.Lerp(new Vector3(startPositionX, goQuestion.transform.localPosition.y), new Vector3(rightPositionX, goQuestion.transform.localPosition.y), i / (shakeTime / 4));

@@ -22,8 +22,10 @@ public class Otage : MonoBehaviour, Utilisable
     void Update()
     {
         if (lastStressRaise + stressPeriod <= Time.time && !talking) { 
-            if (panic < maxPanic)
-                PanicRaise();
+            if (panic < maxPanic) { 
+                int raise = Random.Range(1, maxStressRaise + 1);
+                PanicRaise(raise);
+            }
             else 
             {
                 RandQuit();
@@ -31,10 +33,9 @@ public class Otage : MonoBehaviour, Utilisable
         }
     }
 
-    public void PanicRaise()
+    public void PanicRaise(int raise)
     {
-        int raise = Random.Range(1, maxStressRaise + 1);
-        print("Augementation + " + raise);
+        
         panic += raise;
         lastStressRaise = Time.time;
 
@@ -51,21 +52,43 @@ public class Otage : MonoBehaviour, Utilisable
     public void PanicDecrease(int decrease)
     {
         panic -= decrease ;
-        if (isYelling & panic < maxPanic/2)
+        if (isYelling & panic < maxPanic/2) { 
             isYelling = false;
+            GetGroupeOtage().subtractYelling();
+        }
     }
     public void RandQuit()
     {
         int rand = Random.Range(1, ((100 / quitChance) + 1));
         print("Part ? = " + rand);
-        if (rand == 100 / quitChance) { 
+        if (rand == 100 / quitChance) {
+
+            GameObject.Find("GameManager").GetComponent<GameManager>().OtageLeave(this);
             Destroy(this.gameObject);
-            GetComponentInParent<GroupeOtage>().nbOtage -=1 ;
+            
         }
         lastStressRaise = Time.time;
     }
-    public void Use() //interface implementation
+    public bool Use() //interface implementation
     {
-        throw new System.NotImplementedException();
+
+        GameManager gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+        gm.questionUI.GetComponent<QuestionManager>().readyToAnswer = true;
+        gm.questionUI.GetComponent<QuestionManager>().InitialiserQuestion(gm.laListeDesQuestions.GetRandomOtageIndividuel(), 0, this);
+
+        return true;
     }
+
+    public void endCall()
+    {
+        talking = false;
+    }
+
+    public GroupeOtage GetGroupeOtage()
+    {
+        GroupeOtage gro = this.GetComponentInParent<GroupeOtage>();
+        return gro;
+    }
+        
 }

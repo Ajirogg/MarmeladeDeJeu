@@ -5,13 +5,21 @@ using UnityEngine;
 public class Telephone : MonoBehaviour, Utilisable
 {
     public bool isRinging;
+    public bool isAnswering;
     public int timeToAnswer;
     public float timeStartCall;
+    public AudioClip sonnerie;
+    public AudioClip allo;
+
+    public float timeLastCall;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        timeLastCall = Time.time;
         isRinging = false;
+        isAnswering = false;
         timeToAnswer = Random.Range(10, 15 + 1);
     }
 
@@ -23,6 +31,8 @@ public class Telephone : MonoBehaviour, Utilisable
 
     public void StartCall()
     {
+        SoundManager.instance.efxSonnerie.Play();
+        
         isRinging = true;
         timeStartCall = Time.time;
         print("Gaston y a le telefon qui son");
@@ -30,6 +40,10 @@ public class Telephone : MonoBehaviour, Utilisable
 
     public void ConversationBegin()
     {
+        SoundManager.instance.efxSonnerie.Stop();
+        SoundManager.instance.efxDialogue.clip = allo ;
+        SoundManager.instance.efxDialogue.PlayDelayed(0.2f);
+        isAnswering = true;
         isRinging = false;
         print("ALLO");
         // Doit appeler la fonction de discussion entre police et preneur d'otages
@@ -37,13 +51,22 @@ public class Telephone : MonoBehaviour, Utilisable
 
     public void endCall()
     {
+        timeLastCall = Time.time;
+        isAnswering = false;
         isRinging = false;
         timeToAnswer = Random.Range(10, 15 + 1);
-        print("o revoar fdp");
+        print("o revoar");
     }
 
-    public void Use()
+    public bool Use()
     {
-        throw new System.NotImplementedException();
+        if (isRinging)
+        {
+            ConversationBegin();
+            return true;
+        }
+
+        return false;
+
     }
 }

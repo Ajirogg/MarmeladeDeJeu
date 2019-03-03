@@ -423,18 +423,18 @@ public class ListeQuestions
     {
         List<Reponse> uneListeReponses = new List<Reponse>
         {
-            new Reponse("Calmez-vous!", 10),
+            new Reponse("FERMEZ-LA!", 20),
             new Reponse("Mais euuh", 0),
             new Reponse("*imite Garou*", -50),
             new Reponse("Criez encore et..", 50),
         };
 
-        Question uneQuestion = new Question("Les otages vous fuient du regard", uneListeReponses);
+        Question uneQuestion = new Question("Les otages parlent entre eux", uneListeReponses);
         questionsOtageGroupe.Add(uneQuestion);
 
         uneListeReponses = new List<Reponse>
         {
-            new Reponse("Taisez-vous!", 10),
+            new Reponse("TAISEZ-VOUS!", 20),
             new Reponse("Botte", -25),
             new Reponse("Arretez svp.", 0),
             new Reponse("Euh stop la", 0),
@@ -442,6 +442,31 @@ public class ListeQuestions
 
         uneQuestion = new Question("Les otages parlent entre eux", uneListeReponses);
         questionsOtageGroupe.Add(uneQuestion);
+
+        uneListeReponses = new List<Reponse>
+        {
+            new Reponse("VOS GUEULES!", 20),
+            new Reponse("Chaussure", -25),
+            new Reponse("Stop svp.", 0),
+            new Reponse("Euh stop la", 0),
+        };
+
+        uneQuestion = new Question("Les otages parlent entre eux", uneListeReponses);
+        questionsOtageGroupe.Add(uneQuestion);
+
+
+        uneListeReponses = new List<Reponse>
+        {
+            new Reponse("Menacer", 20),
+            new Reponse("Chaussure", -25),
+            new Reponse("Stop svp.", 0),
+            new Reponse("Euh stop la", 0),
+        };
+
+        uneQuestion = new Question("Les otages parlent entre eux", uneListeReponses);
+        questionsOtageGroupe.Add(uneQuestion);
+
+
 
 
 
@@ -510,7 +535,7 @@ public class ListeQuestions
         uneListeReponses = new List<Reponse>
         {
             new Reponse("FERME-LA", 0),
-            new Reponse("Aider", 30),
+            new Reponse("Aider", 40),
             new Reponse("Euh", -5),
             new Reponse("Le tuer", 666),
         };

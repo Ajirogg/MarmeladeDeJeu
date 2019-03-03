@@ -22,7 +22,7 @@ public class Telephone : MonoBehaviour, Utilisable
         timeLastCall = Time.time;
         isRinging = false;
         isAnswering = false;
-        timeToAnswer = Random.Range(5, 10 + 1);
+        timeToAnswer = Random.Range(8, 15 + 1);
         telephoneAnimator = this.GetComponentInChildren<Animator>();
         sonar = GameObject.FindObjectsOfType<SimpleSonarShader_Object>();
     }
@@ -80,7 +80,7 @@ public class Telephone : MonoBehaviour, Utilisable
         isRinging = false;
         timeLastCall = Time.time;
         telephoneAnimator.SetBool("isRinging", isRinging);
-        timeToAnswer = Random.Range(5, 10 + 1);
+        timeToAnswer = Random.Range(8, 15 + 1);
     }
 
     public bool Use()

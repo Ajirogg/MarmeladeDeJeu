@@ -26,7 +26,7 @@ public class ComputerComponent : MonoBehaviour, Utilisable
     public float miningGrowth = 1.015f;
     public float miningTickNumberToGrow = 4;
 
-    
+    public bool isTyping = false;
 
 
     /*Cycle de vie*/
@@ -137,7 +137,7 @@ public class ComputerComponent : MonoBehaviour, Utilisable
 
     public bool Use() //interface implementation
     {
-
+        isTyping = true;
         GameManager gm = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         gm.questionUI.GetComponent<QuestionManager>().readyToAnswer = true;
@@ -154,5 +154,6 @@ public class ComputerComponent : MonoBehaviour, Utilisable
 
     public void endCall()
     {
+        isTyping = false;
     }
 }

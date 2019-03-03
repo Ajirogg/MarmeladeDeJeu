@@ -13,6 +13,8 @@ public class Otage : MonoBehaviour, Utilisable
     public int maxPanic = 200;
     public bool talking = false;
 
+    public Animator hostageAnimator;
+
     private void Start()
     {
         lastStressRaise = Time.time ;
@@ -42,6 +44,7 @@ public class Otage : MonoBehaviour, Utilisable
         if (!isYelling & panic >= maxPanic/2)
         {
             isYelling = true;
+            hostageAnimator.SetBool("Yelling", isYelling);
             GetComponentInParent<GroupeOtage>().addYelling();
         }
 
@@ -54,6 +57,7 @@ public class Otage : MonoBehaviour, Utilisable
         panic -= decrease ;
         if (isYelling & panic < maxPanic/2) { 
             isYelling = false;
+            hostageAnimator.SetBool("Yelling", isYelling);
             GetGroupeOtage().subtractYelling();
         }
     }
@@ -63,11 +67,20 @@ public class Otage : MonoBehaviour, Utilisable
         print("Part ? = " + rand);
         if (rand == 100 / quitChance) {
 
+            GameObject.Find("GameManager").GetComponent<GameManager>().police.augmenterEtat();
             GameObject.Find("GameManager").GetComponent<GameManager>().OtageLeave(this);
-            Destroy(this.gameObject);
-            
+            hostageAnimator.SetBool("Escaped", true);
+            this.gameObject.GetComponent<CircleCollider2D>().enabled = false;
+            this.gameObject.GetComponent<Otage>().enabled = false;
+
         }
         lastStressRaise = Time.time;
+    }
+    public void Dying()
+    {
+        hostageAnimator.SetBool("Died", true);
+        this.gameObject.GetComponent<CircleCollider2D>().enabled = false;
+        this.gameObject.GetComponent<Otage>().enabled = false;
     }
     public bool Use() //interface implementation
     {

@@ -18,7 +18,7 @@ public class ApparaitreVoiturePolice : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameObject.GetComponent<ApparaitreVoiturePolice>().policenumber == police.etatPolice)
+        if (gameObject.GetComponent<ApparaitreVoiturePolice>().policenumber <= police.etatPolice)
         {
             policecaranimator.SetBool ("apparu", true);
 

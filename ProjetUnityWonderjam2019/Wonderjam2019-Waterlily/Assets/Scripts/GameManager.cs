@@ -141,6 +141,7 @@ public class GameManager : MonoBehaviour
             SoundManager.instance.efxDialogue.Play();
             SoundManager.instance.efxExterieur.clip = ambulance;
             SoundManager.instance.efxExterieur.PlayDelayed(5);
+            ota.Dying();
             OtageLeave(ota);
         }
         else if (indice > 0)

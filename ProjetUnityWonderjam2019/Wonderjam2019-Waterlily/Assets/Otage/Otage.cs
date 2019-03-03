@@ -67,6 +67,7 @@ public class Otage : MonoBehaviour, Utilisable
         print("Part ? = " + rand);
         if (rand == 100 / quitChance) {
 
+            GameObject.Find("GameManager").GetComponent<GameManager>().police.augmenterEtat();
             GameObject.Find("GameManager").GetComponent<GameManager>().OtageLeave(this);
             hostageAnimator.SetBool("Escaped", true);
             this.gameObject.GetComponent<CircleCollider2D>().enabled = false;
@@ -74,6 +75,12 @@ public class Otage : MonoBehaviour, Utilisable
 
         }
         lastStressRaise = Time.time;
+    }
+    public void Dying()
+    {
+        hostageAnimator.SetBool("Died", true);
+        this.gameObject.GetComponent<CircleCollider2D>().enabled = false;
+        this.gameObject.GetComponent<Otage>().enabled = false;
     }
     public bool Use() //interface implementation
     {

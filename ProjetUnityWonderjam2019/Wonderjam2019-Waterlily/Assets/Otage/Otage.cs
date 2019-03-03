@@ -103,13 +103,10 @@ public class Otage : MonoBehaviour, Utilisable
     }
     public void Dying()
     {
-        // disable glow effect when dying   
-        if (this.gameObject.GetComponent<SpriteGlow.SpriteGlowEffect>() != null)
-            this.gameObject.GetComponent<SpriteGlow.SpriteGlowEffect>().enabled = false;
-
         hostageAnimator.SetBool("Died", true);
         this.gameObject.GetComponent<CircleCollider2D>().enabled = false;
         this.gameObject.GetComponent<Otage>().enabled = false;
+        
     }
     public bool Use() //interface implementation
     {

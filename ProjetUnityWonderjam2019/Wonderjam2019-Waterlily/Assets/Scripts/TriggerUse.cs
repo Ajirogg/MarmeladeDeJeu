@@ -39,6 +39,8 @@ public class TriggerUse : MonoBehaviour
                 return ob;
             }
 
+            //Glow(ob);
+
         }
         Glow(toReturn);
         return toReturn;
@@ -51,7 +53,7 @@ public class TriggerUse : MonoBehaviour
         if (u.GetComponent<GroupeOtage>() != null)
         {
             Glow(u.GetComponent<GroupeOtage>());
-            return;
+            //return;
         }
         //SetYellow(u);
         if (u.GetComponentInChildren<SpriteRenderer>() != null) //Recupere le GO où il y a le sprite
@@ -61,7 +63,7 @@ public class TriggerUse : MonoBehaviour
         if (u.gameObject.GetComponent<SpriteGlow.SpriteGlowEffect>() != null)
         {
             u.gameObject.GetComponent<SpriteGlow.SpriteGlowEffect>().enabled = true;
-            SetYellow(u);
+            //SetYellow(u);
 
 
         }
@@ -69,7 +71,7 @@ public class TriggerUse : MonoBehaviour
         {
             SpriteGlow.SpriteGlowEffect n = u.gameObject.AddComponent<SpriteGlow.SpriteGlowEffect>();
             n.GlowBrightness = 1.38f;
-            SetYellow(u);
+            //SetYellow(u);
         }
     }
 

@@ -19,9 +19,13 @@ public class InGameSettingsButtonsMenu : MonoBehaviour
         if (Event.current.Equals(Event.KeyboardEvent(KeyCode.Escape.ToString())))
         {
             if (!settingsActivated)
+            {
                 Open();
+            }
             else
+            {
                 Close();
+            }
         }
     }
 
@@ -29,6 +33,7 @@ public class InGameSettingsButtonsMenu : MonoBehaviour
     public void HomeClick()
     {
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+        SoundManager.instance.musicSource.Stop();
     }
 
     public void BackClick()
@@ -42,6 +47,7 @@ public class InGameSettingsButtonsMenu : MonoBehaviour
         settingsActivated = true;
 
         gameObject.GetComponent<SettingsManagement>().DisplayCurrentSettings();
+        
         //On affiche le canvas des settings
         gameObject.transform.Find("MainFrame").gameObject.SetActive(true);
         gameObject.transform.Find("Blur").gameObject.SetActive(true);
@@ -49,7 +55,7 @@ public class InGameSettingsButtonsMenu : MonoBehaviour
         gameObject.transform.Find("TopRightPanel").gameObject.SetActive(true);
 
         //On stop le jeu
-
+        Time.timeScale = 0.0f;
     }
 
     private void Close()
@@ -63,6 +69,6 @@ public class InGameSettingsButtonsMenu : MonoBehaviour
         gameObject.transform.Find("TopRightPanel").gameObject.SetActive(false);
 
         //On relance le jeu
-
+        Time.timeScale = 1.0f;
     }
 }

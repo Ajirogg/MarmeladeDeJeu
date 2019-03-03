@@ -22,9 +22,6 @@ public class CanvasFadeDrop : MonoBehaviour
 
         //Canvas Init
         rect = GetComponent<RectTransform>();
-            //Position de l'ancre
-        rect.anchorMin = new Vector2(0,1);
-        rect.anchorMax = new Vector2(0,1);
             //taille et position
         basePosX = Mathf.Abs(rect.anchoredPosition.x);
         basePosY = Mathf.Abs(rect.anchoredPosition.y);
@@ -65,6 +62,6 @@ public class CanvasFadeDrop : MonoBehaviour
         float offSet = (execTime / timeToFade) * dropLength;
         if (offSet > dropLength)
             offSet = dropLength;
-        rect.anchoredPosition = new Vector3(basePosX, -(basePosY + offSet), 0);
+        rect.anchoredPosition = new Vector3(basePosX, (basePosY + offSet), 0);
     }
 }

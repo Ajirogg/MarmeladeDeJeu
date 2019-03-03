@@ -14,8 +14,7 @@ public class Telephone : MonoBehaviour, Utilisable
     public float timeLastCall;
 
     public Animator telephoneAnimator;
-
-    private SimpleSonarShader_Object[] sonar;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -24,15 +23,17 @@ public class Telephone : MonoBehaviour, Utilisable
         isAnswering = false;
         timeToAnswer = Random.Range(5, 10 + 1);
         telephoneAnimator = this.GetComponentInChildren<Animator>();
-        sonar = GameObject.FindObjectsOfType<SimpleSonarShader_Object>();
+
+        sonar = GameObject.FindObjectOfType<InitSonar>().GetSonar();
     }
 
+    private SimpleSonarShader_Object sonar;
     public void CreateRing()
     {
-        foreach (SimpleSonarShader_Object o in sonar)
-        {
-            o.StartSonarRing(transform.position, 1);
-        }
+        if(sonar == null)
+            sonar = GameObject.FindObjectOfType<InitSonar>().GetSonar();
+
+        sonar.StartSonarRing(transform.position, 1);
     }
     // Update is called once per frame
 

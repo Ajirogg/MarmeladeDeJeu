@@ -8,7 +8,7 @@ public class SimpleSonarShader_Object : MonoBehaviour
 {
 
     // All the renderers that will have the sonar data sent to their shaders.
-    private Renderer[] ObjectRenderers;
+    public Renderer[] ObjectRenderers;
 
     // Throwaway values to set position to at the start.
     private static readonly Vector4 GarbagePosition = new Vector4(-5000, -5000, -5000, -5000);
@@ -79,10 +79,25 @@ public class SimpleSonarShader_Object : MonoBehaviour
         // Send updated queues to the shaders
         foreach (Renderer r in ObjectRenderers)
         {
-            r.material.SetVectorArray("_hitPts", positionsQueue.ToArray());
-            r.material.SetFloatArray("_Intensity", intensityQueue.ToArray());
+            if(r != null)
+            {
+                r.material.SetVectorArray("_hitPts", positionsQueue.ToArray());
+                r.material.SetFloatArray("_Intensity", intensityQueue.ToArray());
+            }
+            else
+            {
+                break;
+            }            
         }
     }
+
+
+    private void ResetRenderer()
+    {
+
+        ObjectRenderers = this.GetComponentsInChildren<Renderer>();
+    }
+
 
     void OnCollisionEnter(Collision collision)
     {

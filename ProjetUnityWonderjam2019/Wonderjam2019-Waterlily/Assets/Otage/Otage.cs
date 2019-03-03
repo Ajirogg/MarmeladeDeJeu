@@ -12,22 +12,21 @@ public class Otage : MonoBehaviour, Utilisable
     public int maxStressRaise = 10;
     public int maxPanic = 200;
     public bool talking = false;
-
-    private SimpleSonarShader_Object[] sonar;
+    
     public Animator hostageAnimator;
 
     private void Start()
     {
-        lastStressRaise = Time.time ;
-        sonar = GameObject.FindObjectsOfType<SimpleSonarShader_Object>(); 
+        lastStressRaise = Time.time;
+        if (sonar == null)
+            sonar = GameObject.FindObjectOfType<InitSonar>().GetSonar();
+        sonar = GameObject.FindObjectOfType<InitSonar>().GetSonar();
     }
 
+    private SimpleSonarShader_Object sonar;
     public void CreateRing()
     {
-        foreach(SimpleSonarShader_Object o in sonar)
-        {
-            o.StartSonarRing(transform.position,1);
-        }
+        sonar.StartSonarRing(transform.position, 1);
     }
 
     // Update is called once per frame

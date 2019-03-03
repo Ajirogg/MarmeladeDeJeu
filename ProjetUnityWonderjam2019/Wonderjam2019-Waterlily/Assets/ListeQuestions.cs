@@ -55,10 +55,10 @@ public class ListeQuestions
     {
         List<Reponse> uneListeReponses = new List<Reponse>
         {
-            new Reponse("Oui", 50),
-            new Reponse("Peut-etre", -25),
-            new Reponse("Non", -50),
-            new Reponse("Quels otages?", -100),
+            new Reponse("Oui", 5),
+            new Reponse("Peut-etre", -5),
+            new Reponse("Non", -10),
+            new Reponse("Quels otages?", -20),
         };
 
         Question uneQuestion = new Question(" ''Est-ce que les otages vont bien ?''", uneListeReponses);
@@ -66,90 +66,80 @@ public class ListeQuestions
 
         uneListeReponses = new List<Reponse>
         {
-            new Reponse("Carrement", 50),
-            new Reponse("Je crois", -25),
-            new Reponse("Bof", -50),
-            new Reponse("Les quoi?", -100),
+            new Reponse("Carrement", 5),
+            new Reponse("Je crois", -10),
+            new Reponse("Bof", -10),
+            new Reponse("Les quoi?", -20),
         };
         uneQuestion = new Question(" ''Est-ce que les otages vont bien ?''", uneListeReponses);
         questionsPolice.Add(uneQuestion);
 
         uneListeReponses = new List<Reponse>
         {
-            new Reponse("Ouais", 50),
-            new Reponse("Euuuh", -25),
-            new Reponse("Bof", -50),
-            new Reponse("Le mort?", -100),
+            new Reponse("Ouais", 5),
+            new Reponse("Euuuh", -5),
+            new Reponse("Bof", -10),
+            new Reponse("Le mort?", -20),
         };
         uneQuestion = new Question(" ''Est-ce que les otages vont bien ?''", uneListeReponses);
         questionsPolice.Add(uneQuestion);
 
         uneListeReponses = new List<Reponse>
         {
-            new Reponse("Affirmatif", 50),
-            new Reponse("Hein", -25),
-            new Reponse("Negatif", -50),
-            new Reponse("Mort.", -100),
+            new Reponse("Affirmatif", 5),
+            new Reponse("Hein", -5),
+            new Reponse("Negatif", -10),
+            new Reponse("Mort.", -20),
         };
         uneQuestion = new Question(" ''Est-ce que les otages vont bien ?''", uneListeReponses);
         questionsPolice.Add(uneQuestion);
 
         uneListeReponses = new List<Reponse>
         {
-            new Reponse("Effectivement", 50),
-            new Reponse("Ben...", -25),
-            new Reponse("Nan", -50),
-            new Reponse("Mort.", -100),
+            new Reponse("Effectivement", 5),
+            new Reponse("Ben...", -5),
+            new Reponse("Nan", -10),
+            new Reponse("Mort.", -20),
         };
         uneQuestion = new Question(" ''Est-ce que les otages vont bien ?''", uneListeReponses);
         questionsPolice.Add(uneQuestion);
 
         uneListeReponses = new List<Reponse>
         {
-            new Reponse("Pour l'instant", 50),
-            new Reponse("Pas le temps", -25),
-            new Reponse("...", -50),
-            new Reponse("B...ien?.", -100),
+            new Reponse("Pour l'instant", 5),
+            new Reponse("Pas le temps", -5),
+            new Reponse("...", -20),
+            new Reponse("B...ien?.", -10),
         };
         uneQuestion = new Question(" ''Est-ce que les otages vont bien ?''", uneListeReponses);
         questionsPolice.Add(uneQuestion);
 
         uneListeReponses = new List<Reponse>
         {
-            new Reponse("Grosse erreur", 50),
-            new Reponse("Nope", -25),
-            new Reponse("Tant pis", -50),
-            new Reponse("Carnage!", -100),
+            new Reponse("Et les otages?", 5),
+            new Reponse("Oh que non", 5),
+            new Reponse("...", -10),
+            new Reponse("Rageux", -20),
         };
         uneQuestion = new Question(" ''Ca suffit, on rentre maintenant !''", uneListeReponses);
         questionsPolice.Add(uneQuestion);
 
         uneListeReponses = new List<Reponse>
         {
-            new Reponse("Et les otages?", 50),
-            new Reponse("Oh que non", -25),
-            new Reponse("...", -50),
-            new Reponse("Rageux", -100),
+            new Reponse("Reculez!", 5),
+            new Reponse("Ah bon", -5),
+            new Reponse("Dommage", -20),
+            new Reponse("Soyez prudents", -20),
         };
         uneQuestion = new Question(" ''Ca suffit, on rentre maintenant !''", uneListeReponses);
         questionsPolice.Add(uneQuestion);
 
         uneListeReponses = new List<Reponse>
         {
-            new Reponse("Reculez!", 50),
-            new Reponse("Ah bon", -25),
-            new Reponse("Dommage", -50),
-            new Reponse("Soyez prudents", -100),
-        };
-        uneQuestion = new Question(" ''Ca suffit, on rentre maintenant !''", uneListeReponses);
-        questionsPolice.Add(uneQuestion);
-
-        uneListeReponses = new List<Reponse>
-        {
-            new Reponse("Ca ira bien!", 50),
-            new Reponse("M'en fous", -25),
-            new Reponse("Triste", -50),
-            new Reponse("Remi sans familles?", -100),
+            new Reponse("Ca ira bien!", 5),
+            new Reponse("M'en fous", -10),
+            new Reponse("Triste", -10),
+            new Reponse("Remi sans familles?", -20),
         };
         uneQuestion = new Question(" ''Ces gens ont des familles, arretez cette folie!''", uneListeReponses);
         questionsPolice.Add(uneQuestion);

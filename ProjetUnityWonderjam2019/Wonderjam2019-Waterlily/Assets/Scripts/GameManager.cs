@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public GameObject questionUI;
     public ListeQuestions laListeDesQuestions = new ListeQuestions();
 
-    public float cooldownPoliceEnervement = 5.0f;
+    public float cooldownPoliceEnervement = 2.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -39,31 +39,25 @@ public class GameManager : MonoBehaviour
         {
             SoundManager.instance.efxSonnerie.Stop();
             telephone.endCall();
-            police.AugmenterAgressivite(25);
-            police.augmenterEtat();
+            police.AugmenterAgressivite(20);
             print("enervement maximal");
             print(telephone.isRinging);
-            cooldownPoliceEnervement = 5.0f;
+            cooldownPoliceEnervement = 2.0f;
         }
 
 
-        if (!telephone.isAnswering)
+        if (telephone.isRinging)
         {
             cooldownPoliceEnervement -= Time.deltaTime;
             if(cooldownPoliceEnervement <= 0)
             {
                 police.AugmenterAgressivite(police.etatPolice);
                 //police.PrintPoliceTest();
-                cooldownPoliceEnervement = 5.0f;
+                cooldownPoliceEnervement = 2.0f;
             }
         }
 
-        /*if (telephone.isAnswering && !questionUI.GetComponent<QuestionManager>().readyToAnswer)
-        {
-            questionUI.GetComponent<QuestionManager>().readyToAnswer = true;
-            questionUI.GetComponent<QuestionManager>().InitialiserQuestion(laListeDesQuestions.GetRandomPolice(),0, telephone);
-        }*/
-
+      
         //GAME OVER
         if (police.etatPolice == 6 || police.agressivitePolice >= 100)
         {
@@ -101,16 +95,6 @@ public class GameManager : MonoBehaviour
 
     public void appliquerReponsePolice(int indice)
     {
-        if (indice < 0)
-        {
-            indice = indice * (25 * police.etatPolice) / 100;
-        }
-        else
-        {
-            indice = indice * (25 * (6 - police.etatPolice)) / 100;
-
-        }
-
         police.AugmenterAgressivite(-indice);
 
         print(police.agressivitePolice);
@@ -125,8 +109,7 @@ public class GameManager : MonoBehaviour
                 ots.PanicDecrease(150);
             }
 
-            police.augmenterEtat();
-            police.AugmenterAgressivite(35);
+            police.AugmenterAgressivite(30);
             SoundManager.instance.efxDialogue.clip = tir;
             SoundManager.instance.efxDialogue.Play();
             SoundManager.instance.efxExterieur.clip = ambulance;
@@ -171,7 +154,7 @@ public class GameManager : MonoBehaviour
     }
     public void OtageLeave(Otage ota)
     {
-        police.AugmenterAgressivite(5 * police.etatPolice);
+        police.AugmenterAgressivite(20);
         ota.GetGroupeOtage().otages.Remove(ota);
         ota.GetGroupeOtage().subtractYelling();
     }

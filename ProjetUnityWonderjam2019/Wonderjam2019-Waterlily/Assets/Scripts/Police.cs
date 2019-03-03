@@ -61,26 +61,6 @@ public class Police : MonoBehaviour
         }
     }
 
-    public void augmenterEtat()
-    {   
-        etatPolice++;
-        if (etatPolice == numeropo)
-        {
-           
-        }
-        print("Etat de la police : " + etatPolice);
-        transition = 1;
-        if (etatPolice == 2)
-        {
-            SoundManager.instance.efxExterieur.clip = voiture;
-            SoundManager.instance.efxExterieur.Play();
-        }
-        if (etatPolice == 3)
-        {
-            SoundManager.instance.efxSirene.Play() ;
-        }
-    }
-
     public void PrintPoliceTest()
     {
         Debug.Log(agressivitePolice);
@@ -92,8 +72,30 @@ public class Police : MonoBehaviour
     public void AugmenterAgressivite(int value)
     {
         agressivitePolice += value;
-        if (agressivitePolice < 0)
-            agressivitePolice = 0;
+       
+        if (agressivitePolice < (etatPolice - 1) * 20)
+        { 
+            agressivitePolice = (etatPolice - 1) * 20;
+
+        }
+        else if (agressivitePolice >= etatPolice * 20)
+        {
+            ++etatPolice;
+            transition = 1;
+        }
+            
+
+
+        if (etatPolice == 2)
+        {
+            SoundManager.instance.efxExterieur.clip = voiture;
+            SoundManager.instance.efxExterieur.Play();
+        }
+        if (etatPolice == 3)
+        {
+            SoundManager.instance.efxSirene.Play();
+        }
+
         frequenceAppel = frequenceAppelMinimum - (frequenceAppelMinimum * etatPolice * 10 / 100);
 
     }

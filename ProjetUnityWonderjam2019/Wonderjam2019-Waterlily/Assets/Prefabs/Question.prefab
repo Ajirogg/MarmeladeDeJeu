@@ -308,7 +308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c554f648dc2d24f4aa0abfba39feb16c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goQuestion: {fileID: 0}
+  goQuestion: {fileID: 6675765938444395700}
   prefabReponse: {fileID: 7128835577480453572, guid: 853ad80514539d54a8020dd7250fcbba,
     type: 3}
   goReponses: []
@@ -316,6 +316,8 @@ MonoBehaviour:
   imageUI:
   - {fileID: 21300000, guid: 269631d01a46646469c2bf6f19c5bab8, type: 3}
   - {fileID: 21300000, guid: 9d028f7a277ed0e49ab21e326588613e, type: 3}
+  inputField: {fileID: 6675765937885689500}
+  shaking: 0
 --- !u!1 &6675765938578926837
 GameObject:
   m_ObjectHideFlags: 0

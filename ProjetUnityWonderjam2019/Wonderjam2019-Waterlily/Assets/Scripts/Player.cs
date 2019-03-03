@@ -5,9 +5,10 @@ public class Player : MonoBehaviour
 {
     float horizontal;
     float vertical;
+    Vector2 movementInput;
     public int indice;
 
-    public float runSpeed = 10f;
+    public float runSpeed = 5f;
     public float rotationSpeed = 1f;
     Vector3 hitPoint;
     new Rigidbody2D rigidbody;
@@ -17,6 +18,7 @@ public class Player : MonoBehaviour
 
     public bool talking = false;
 
+    public Animator playerAnimator;
 
     void Start()
     {
@@ -32,17 +34,21 @@ public class Player : MonoBehaviour
         {
             horizontal = Input.GetAxis("Horizontal");
             vertical = Input.GetAxis("Vertical");
+            movementInput = new Vector2(horizontal, vertical);
+
+            if (movementInput.magnitude > 1f)
+                movementInput = movementInput.normalized;
+
 
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 talking = Use();
             }
 
-            if (rigidbody.velocity.sqrMagnitude > 5)
+            if (rigidbody.velocity.sqrMagnitude > 1)
             {
-                angle = Mathf.Atan2(rigidbody.velocity.x, rigidbody.velocity.y) * Mathf.Rad2Deg;
+                angle = Mathf.Atan2(movementInput.x, movementInput.y) * Mathf.Rad2Deg;
             }
-            rigidbody.MoveRotation(-angle);
         }
 
         else
@@ -78,14 +84,17 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         Movement();
+        rigidbody.MoveRotation(-(int)angle);
     }
 
 
     private void Movement()
     {
 
-        rigidbody.velocity = new Vector2(Mathf.Lerp(0,horizontal * runSpeed, 0.8f),
-                                                 Mathf.Lerp(0, vertical * runSpeed, 0.8f));
+        rigidbody.velocity = new Vector2(movementInput.x * runSpeed, movementInput.y * runSpeed);
+
+        playerAnimator.SetFloat("Speed", rigidbody.velocity.magnitude);
+
 
 
 

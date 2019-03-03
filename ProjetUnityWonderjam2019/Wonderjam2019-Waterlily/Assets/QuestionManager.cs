@@ -156,7 +156,7 @@ public class QuestionManager : MonoBehaviour
 
             //Movement
             goQuestion.transform.localPosition = new Vector3(goQuestion.transform.localPosition.x, startPositionY - actualMovementY, goQuestion.transform.localPosition.z);
-            goReponses[answerChosen].transform.localPosition = new Vector3(goReponses[answerChosen].transform.localPosition.x, startPositionAnswerY + actualMovementY*2, goReponses[answerChosen].transform.localPosition.z);
+            goReponses[answerChosen].transform.localPosition = new Vector3(goReponses[answerChosen].transform.localPosition.x, startPositionAnswerY + actualMovementY * 2, goReponses[answerChosen].transform.localPosition.z);
 
 
             //Fade
@@ -240,6 +240,7 @@ public class QuestionManager : MonoBehaviour
             inputField.text = "";
             inputField.Select();
             inputField.ActivateInputField();
+
             shaking = false;
         }
         yield return null;

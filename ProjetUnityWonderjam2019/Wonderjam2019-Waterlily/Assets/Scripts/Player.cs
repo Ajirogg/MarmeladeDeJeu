@@ -93,7 +93,7 @@ public class Player : MonoBehaviour
 
         rigidbody.velocity = new Vector2(movementInput.x * runSpeed, movementInput.y * runSpeed);
 
-        playerAnimator.SetFloat("Speed", rigidbody.velocity.magnitude);
+        //playerAnimator.SetFloat("Speed", rigidbody.velocity.magnitude);
 
 
 

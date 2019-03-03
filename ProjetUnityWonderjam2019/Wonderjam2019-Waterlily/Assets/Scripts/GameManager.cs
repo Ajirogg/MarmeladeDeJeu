@@ -9,7 +9,9 @@ public class GameManager : MonoBehaviour
     public GroupeOtage gOtage2;
     public GroupeOtage gOtage3;
     public Telephone telephone;
+    public ComputerComponent ordinateur;
     public Player player;
+    public AudioClip tir;
 
     public GameObject questionUI;
     public ListeQuestions laListeDesQuestions = new ListeQuestions();
@@ -20,7 +22,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         //questionUI = GameObject.FindGameObjectWithTag("Question");
-        
+        SoundManager.instance.musicSource.Play();
     }
 
     // Update is called once per frame
@@ -96,8 +98,16 @@ public class GameManager : MonoBehaviour
             appliquerReponseOtage(indice, (Otage)obj);
             print("HOP la réponse est appliquée à l'otage");
         }
-            
-            
+        else if (obj.GetType() == gOtage1.GetType())
+        {
+            appliquerReponseGroupeOtage(indice, (GroupeOtage)obj);
+            print("HOP la réponse est appliquée à un groupe d'otage");
+        } 
+        else if (obj.GetType() == ordinateur.GetType())
+        {
+            appliquerReponseOrdinateur(indice);
+            print("HOP la réponse est appliquée à un ordinateur");
+        }
     }
 
     public void appliquerReponsePolice(int indice)
@@ -125,6 +135,9 @@ public class GameManager : MonoBehaviour
             {
                 ots.PanicDecrease(150);
             }
+
+            SoundManager.instance.efxDialogue.clip = tir;
+            SoundManager.instance.efxDialogue.Play();
             OtageLeave(ota);
         }
         else if (indice > 0)
@@ -137,6 +150,29 @@ public class GameManager : MonoBehaviour
         
     }
 
+    public void appliquerReponseGroupeOtage(int indice, GroupeOtage go)
+    {
+        foreach (Otage ots in go.otages)
+        {
+            if (indice > 0)
+                ots.PanicDecrease(indice);
+            else
+                ots.PanicRaise(-indice);
+        }
+    }
+    public void appliquerReponseOrdinateur(int indice)
+    {
+        if (ordinateur.IsCurrentlyworking())
+        {
+            if (indice > 0)
+            {
+                ordinateur.ManualMine(indice);
+            }
+        }
+        else
+            ordinateur.SwitchOn();
+        
+    }
     public void OtageLeave(Otage ota)
     {
         police.AugmenterAgressivite(5 * police.etatPolice);

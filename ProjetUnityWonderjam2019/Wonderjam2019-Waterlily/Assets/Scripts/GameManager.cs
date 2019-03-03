@@ -178,7 +178,7 @@ public class GameManager : MonoBehaviour
     }
     public void OtageLeave(Otage ota)
     {
-        police.AugmenterAgressivite(5 * police.etatPolice);
+        police.augmenterEtat();
         print("L'otage est partis de jhonny haliday ");
         ota.GetGroupeOtage().otages.Remove(ota);
         ota.GetGroupeOtage().subtractYelling();

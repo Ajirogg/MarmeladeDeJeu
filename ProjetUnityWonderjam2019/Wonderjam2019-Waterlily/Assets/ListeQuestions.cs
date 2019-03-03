@@ -231,7 +231,7 @@ public class ListeQuestions
         uneQuestion = new Question("//BANK-ACCOUNT NUMBER " + 2917 + "-" + 9341 + "// PASSWORD???", uneListeReponses);
         questionsOrdinateur.Add(uneQuestion);
 
-        
+
 
         uneListeReponses = new List<Reponse>
         {
@@ -442,6 +442,7 @@ public class ListeQuestions
 
         uneQuestion = new Question("Les otages parlent entre eux", uneListeReponses);
         questionsOtageGroupe.Add(uneQuestion);
+
 
 
     }

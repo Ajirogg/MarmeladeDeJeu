@@ -24,6 +24,12 @@ public class GroupeOtage : MonoBehaviour, Utilisable
         }
     }
 
+    public void CreateRing()
+    {
+        foreach(Otage o in otages)
+            o.CreateRing();
+    }
+
     // Update is called once per frame
     void Update()
     {

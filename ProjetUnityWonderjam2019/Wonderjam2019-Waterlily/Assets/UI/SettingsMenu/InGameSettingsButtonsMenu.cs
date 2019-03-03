@@ -14,9 +14,9 @@ public class InGameSettingsButtonsMenu : MonoBehaviour
         settingsActivated = false;
     }
 
-    void OnGUI()
+    private void Update()
     {
-        if (Event.current.Equals(Event.KeyboardEvent(KeyCode.Escape.ToString())))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (!settingsActivated)
             {

@@ -16,6 +16,7 @@ public class Police : MonoBehaviour
     public int songPlaying = -1;
     public float volumeMin = 0.1f;
     public float volumeMax ;
+    public int numeropo;
 
     // Start is called before the first frame update
     void Start()
@@ -61,8 +62,12 @@ public class Police : MonoBehaviour
     }
 
     public void augmenterEtat()
-    {
+    {   
         etatPolice++;
+        if (etatPolice == numeropo)
+        {
+           
+        }
         print("Etat de la police : " + etatPolice);
         transition = 1;
         if (etatPolice == 2)

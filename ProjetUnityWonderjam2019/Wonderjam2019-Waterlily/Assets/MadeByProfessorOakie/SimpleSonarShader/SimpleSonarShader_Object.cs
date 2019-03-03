@@ -52,7 +52,7 @@ public class SimpleSonarShader_Object : MonoBehaviour
         // Add this objects function to the static delegate
         RingDelegate += SendSonarData;
 
-        StartSonarRing(transform.position, 2);
+        
     }
 
     /// <summary>

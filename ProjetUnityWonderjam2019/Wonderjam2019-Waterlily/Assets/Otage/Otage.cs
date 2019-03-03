@@ -13,31 +13,54 @@ public class Otage : MonoBehaviour, Utilisable
     public int maxPanic = 200;
     public bool talking = false;
 
+    private SimpleSonarShader_Object[] sonar;
     public Animator hostageAnimator;
 
     private void Start()
     {
         lastStressRaise = Time.time ;
+        sonar = GameObject.FindObjectsOfType<SimpleSonarShader_Object>(); 
+    }
+
+    public void CreateRing()
+    {
+        foreach(SimpleSonarShader_Object o in sonar)
+        {
+            o.StartSonarRing(transform.position,1);
+        }
     }
 
     // Update is called once per frame
+    private float ringCountdown = 0.8f;
     void Update()
     {
-        if (lastStressRaise + stressPeriod <= Time.time && !talking) { 
-            if (panic < maxPanic) { 
+        if (lastStressRaise + stressPeriod <= Time.time && !talking) {
+            if (panic < maxPanic) {
                 int raise = Random.Range(1, maxStressRaise + 1);
                 PanicRaise(raise);
             }
-            else 
+            else
             {
                 RandQuit();
             }
         }
+
+        if (isYelling)
+            ringCountdown -= Time.deltaTime;
+        else
+            return;
+
+        if (ringCountdown <= 0)
+        {
+            ringCountdown = 0.8f;
+            this.CreateRing();
+        }
+
     }
 
     public void PanicRaise(int raise)
     {
-        
+
         panic += raise;
         lastStressRaise = Time.time;
 
@@ -50,16 +73,18 @@ public class Otage : MonoBehaviour, Utilisable
 
         if (panic > maxPanic)
             panic = maxPanic;
-        
+
     }
     public void PanicDecrease(int decrease)
     {
         panic -= decrease ;
-        if (isYelling & panic < maxPanic/2) { 
+        if (isYelling & panic < maxPanic/2) {
             isYelling = false;
             hostageAnimator.SetBool("Yelling", isYelling);
             GetGroupeOtage().subtractYelling();
         }
+        if (panic < 0)
+            panic = 0;
     }
     public void RandQuit()
     {
@@ -67,6 +92,7 @@ public class Otage : MonoBehaviour, Utilisable
         print("Part ? = " + rand);
         if (rand == 100 / quitChance) {
 
+            GameObject.Find("GameManager").GetComponent<GameManager>().police.augmenterEtat();
             GameObject.Find("GameManager").GetComponent<GameManager>().OtageLeave(this);
             hostageAnimator.SetBool("Escaped", true);
             this.gameObject.GetComponent<CircleCollider2D>().enabled = false;
@@ -74,6 +100,13 @@ public class Otage : MonoBehaviour, Utilisable
 
         }
         lastStressRaise = Time.time;
+    }
+    public void Dying()
+    {
+        hostageAnimator.SetBool("Died", true);
+        this.gameObject.GetComponent<CircleCollider2D>().enabled = false;
+        this.gameObject.GetComponent<Otage>().enabled = false;
+        
     }
     public bool Use() //interface implementation
     {
@@ -96,5 +129,5 @@ public class Otage : MonoBehaviour, Utilisable
         GroupeOtage gro = this.GetComponentInParent<GroupeOtage>();
         return gro;
     }
-        
+
 }

@@ -12,6 +12,11 @@ public class DummyUtilisable : MonoBehaviour, Utilisable
 
     }
 
+    void Utilisable.CreateRing()
+    {
+
+    }
+
     // Update is called once per frame
     void Update()
     {

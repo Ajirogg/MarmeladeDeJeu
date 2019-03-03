@@ -7,4 +7,6 @@ public interface Utilisable
     bool Use();
 
     void endCall();
+
+    void CreateRing();
 }

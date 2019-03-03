@@ -60,6 +60,8 @@ public class Otage : MonoBehaviour, Utilisable
             hostageAnimator.SetBool("Yelling", isYelling);
             GetGroupeOtage().subtractYelling();
         }
+        if (panic < 0)
+            panic = 0;
     }
     public void RandQuit()
     {

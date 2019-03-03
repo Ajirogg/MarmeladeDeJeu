@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2102513421310893587
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2102513421310893585}
+  - component: {fileID: 2102513421310893586}
+  m_Layer: 0
+  m_Name: Police
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2102513421310893585
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2102513421310893587}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.2328656, y: -1.9407226, z: 0.2574074}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2102513421310893586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2102513421310893587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1421514d7cc1d442b45770614e74d94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  etatPolice: 0
+  agressivitePolice: 0
+  frequenceAppel: 60
+  frequenceAppelMinimum: 60
+  "sir\xE8ne": {fileID: 8300000, guid: cce7c61aaf746904ea8143126963a271, type: 3}
+  voiture: {fileID: 8300000, guid: e3bcd34f9267c4e48b9d059d108c7c41, type: 3}
+  MusicThemes:
+  - {fileID: 8300000, guid: 09ab9ba0830144b4db8f802e2da6d9b2, type: 3}
+  - {fileID: 8300000, guid: 04f6c7fb0db4acd46a207e8a03058df0, type: 3}
+  - {fileID: 8300000, guid: cdeeb91b633aedd4698e3c98e180eb81, type: 3}
+  - {fileID: 8300000, guid: 624146a7315f67b42800894d4162ecc2, type: 3}
+  transition: 0
+  songPlaying: -1
+  volumeMin: 0.1
+  volumeMax: 0.8

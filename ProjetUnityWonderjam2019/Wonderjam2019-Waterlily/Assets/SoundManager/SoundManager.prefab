@@ -48,7 +48,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 45d95e11c682bab4a8769976a694c315, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -144,7 +144,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: cce7c61aaf746904ea8143126963a271, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -240,7 +240,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -430,9 +430,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 228a360be5d4b1344ae7fd0b04a6d6bb, type: 3}
+  m_audioClip: {fileID: 8300000, guid: c00f96754d0ad2544847fe22abcda813, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -533,5 +533,10 @@ MonoBehaviour:
   efxSirene: {fileID: 3492005406181870583}
   efxExterieur: {fileID: 8403093333412108146}
   musicSource: {fileID: 6843322765539530442}
+  maxEfxSonnerie: 0.2
+  maxEfxDialogue: 1
+  maxEfxSirene: 0.2
+  maxEfxExterieur: 0.2
+  maxMusicSource: 0.6
   lowPitchRange: 0.95
   highPitchRange: 1.05

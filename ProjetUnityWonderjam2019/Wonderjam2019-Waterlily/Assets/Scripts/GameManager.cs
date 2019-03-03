@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public ComputerComponent ordinateur;
     public Player player;
     public AudioClip tir;
+    public AudioClip ambulance;
 
     public GameObject questionUI;
     public ListeQuestions laListeDesQuestions = new ListeQuestions();
@@ -45,13 +46,13 @@ public class GameManager : MonoBehaviour
         if(telephone.timeLastCall + police.GetFrequenceAppel() <= Time.time && !telephone.isRinging && !telephone.isAnswering)
         {
             telephone.StartCall();
-            
+
         }
-               
+
 
         if (Time.time >= telephone.timeToAnswer + telephone.timeStartCall && telephone.isRinging)
         {
-            
+            SoundManager.instance.efxSonnerie.Stop();
             telephone.endCall();
             police.AugmenterAgressivite(25);
             police.augmenterEtat();
@@ -89,7 +90,7 @@ public class GameManager : MonoBehaviour
 
     public void appliquerReponse(int indice, Utilisable obj)
     {
-        if (obj.GetType() == telephone.GetType()) { 
+        if (obj.GetType() == telephone.GetType()) {
             appliquerReponsePolice(indice);
             print("HOP la réponse est appliquée à la police");
         }
@@ -102,7 +103,7 @@ public class GameManager : MonoBehaviour
         {
             appliquerReponseGroupeOtage(indice, (GroupeOtage)obj);
             print("HOP la réponse est appliquée à un groupe d'otage");
-        } 
+        }
         else if (obj.GetType() == ordinateur.GetType())
         {
             appliquerReponseOrdinateur(indice);
@@ -138,6 +139,8 @@ public class GameManager : MonoBehaviour
 
             SoundManager.instance.efxDialogue.clip = tir;
             SoundManager.instance.efxDialogue.Play();
+            SoundManager.instance.efxExterieur.clip = ambulance;
+            SoundManager.instance.efxExterieur.PlayDelayed(5);
             OtageLeave(ota);
         }
         else if (indice > 0)
@@ -146,8 +149,8 @@ public class GameManager : MonoBehaviour
         }
         else
             ota.PanicRaise(-indice);
-            
-        
+
+
     }
 
     public void appliquerReponseGroupeOtage(int indice, GroupeOtage go)
@@ -171,7 +174,7 @@ public class GameManager : MonoBehaviour
         }
         else
             ordinateur.SwitchOn();
-        
+
     }
     public void OtageLeave(Otage ota)
     {

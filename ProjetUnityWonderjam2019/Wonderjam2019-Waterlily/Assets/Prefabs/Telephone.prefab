@@ -124,6 +124,8 @@ MonoBehaviour:
   isAnswering: 0
   timeToAnswer: 0
   timeStartCall: 0
+  sonnerie: {fileID: 8300000, guid: 45d95e11c682bab4a8769976a694c315, type: 3}
+  allo: {fileID: 8300000, guid: debca4da605058a44b92d910c667233c, type: 3}
   timeLastCall: 0
   telephoneAnimator: {fileID: 0}
 --- !u!95 &8592026215965202174

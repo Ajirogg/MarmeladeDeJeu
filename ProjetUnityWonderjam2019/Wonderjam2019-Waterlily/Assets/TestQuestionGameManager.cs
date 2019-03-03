@@ -9,7 +9,7 @@ public class TestQuestionGameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject.FindGameObjectWithTag("Question").GetComponent<QuestionManager>().InitialiserQuestion(laListeDesQuestions.GetRandomPolice(), 0);
+        GameObject.FindGameObjectWithTag("Question").GetComponent<QuestionManager>().InitialiserQuestion(laListeDesQuestions.GetRandomPolice(), 0, null);
     }
 
 }

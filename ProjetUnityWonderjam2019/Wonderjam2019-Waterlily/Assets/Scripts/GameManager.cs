@@ -11,13 +11,16 @@ public class GameManager : MonoBehaviour
     public Telephone telephone;
     public Player player;
 
+    public GameObject questionUI;
+    ListeQuestions laListeDesQuestions = new ListeQuestions();
+
     public float cooldownPoliceEnervement = 5.0f;
-    public float tempsAvantAppel;
 
     // Start is called before the first frame update
     void Start()
     {
-        tempsAvantAppel = Time.time;
+        //questionUI = GameObject.FindGameObjectWithTag("Question");
+        
     }
 
     // Update is called once per frame
@@ -37,7 +40,7 @@ public class GameManager : MonoBehaviour
         }
 
 
-        if(tempsAvantAppel + /*police.GetFrequenceAppel()*/ 10 <= Time.time && !telephone.isRinging && !telephone.isAnswering)
+        if(telephone.timeLastCall + /*police.GetFrequenceAppel()*/ 10 <= Time.time && !telephone.isRinging && !telephone.isAnswering)
         {
             telephone.StartCall();
             
@@ -49,27 +52,59 @@ public class GameManager : MonoBehaviour
             
             telephone.endCall();
             police.AugmenterAgressivite(25);
+            police.augmenterEtat();
             print("enervement maximal");
             print(telephone.isRinging);
             cooldownPoliceEnervement = 5.0f;
-            tempsAvantAppel = Time.time;
-
         }
 
 
-        if (telephone.isRinging)
+        if (!telephone.isAnswering)
         {
             cooldownPoliceEnervement -= Time.deltaTime;
             if(cooldownPoliceEnervement <= 0)
             {
-                police.AugmenterAgressivite(1);
-                print("enervement + 1");
+                police.AugmenterAgressivite(police.etatPolice);
+                print("enervement");
                 police.PrintPoliceTest();
                 cooldownPoliceEnervement = 5.0f;
             }
         }
 
+        if (telephone.isAnswering && !questionUI.GetComponent<QuestionManager>().readyToAnswer)
+        {
+            questionUI.GetComponent<QuestionManager>().readyToAnswer = true;
+            questionUI.GetComponent<QuestionManager>().InitialiserQuestion(laListeDesQuestions.GetRandomPolice(),0, telephone);
+        }
+
+
+
+
+
+        //GAME OVER
+        if(police.etatPolice == 6 || police.agressivitePolice >= 100)
+        {
+            throw new System.Exception("GAME OVER");
+        }
 
 
     }
+
+    public void appliquerReponse(int indice)
+    {
+        if(indice < 0)
+        {
+            indice = indice * (25 * police.etatPolice) / 100;
+        }
+        else
+        {
+            indice = indice * (25 * (6 - police.etatPolice)) / 100;
+            
+        }
+
+        police.AugmenterAgressivite(-indice);
+
+        print(police.agressivitePolice);
+    }
+
 }

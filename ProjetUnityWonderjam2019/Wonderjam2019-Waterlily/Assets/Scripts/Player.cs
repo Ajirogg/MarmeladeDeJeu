@@ -5,6 +5,7 @@ public class Player : MonoBehaviour
 {
     float horizontal;
     float vertical;
+    public int indice;
 
     public float runSpeed = 10f;
     public float rotationSpeed = 1f;
@@ -12,6 +13,9 @@ public class Player : MonoBehaviour
     new Rigidbody2D rigidbody;
     TriggerUse triggerUse;
     float angle;
+
+    public bool talking = false;
+
 
     void Start()
     {
@@ -23,25 +27,51 @@ public class Player : MonoBehaviour
   
     void Update()
     {
-        horizontal = Input.GetAxis("Horizontal");
-        vertical = Input.GetAxis("Vertical");
-
-        if (Input.GetKeyDown(KeyCode.E))
+        if (!talking)
         {
-            Use();
-        }
+            horizontal = Input.GetAxis("Horizontal");
+            vertical = Input.GetAxis("Vertical");
 
-        if (rigidbody.velocity.sqrMagnitude > 5)
-        {
-            angle = Mathf.Atan2(rigidbody.velocity.x, rigidbody.velocity.y) * Mathf.Rad2Deg;            
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                talking = Use();
+            }
+
+            if (rigidbody.velocity.sqrMagnitude > 5)
+            {
+                angle = Mathf.Atan2(rigidbody.velocity.x, rigidbody.velocity.y) * Mathf.Rad2Deg;
+            }
+            rigidbody.MoveRotation(-angle);
         }
-        rigidbody.MoveRotation(-angle);
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                Answer();
+            }
+
+        }
 
     }
 
-    private void Use()
+    private bool Use()
     {
-        triggerUse.FirstObject().GetComponent<Utilisable>().Use();           
+        if (triggerUse.FirstObject() == null)
+            return false;
+        return triggerUse.FirstObject().GetComponent<Utilisable>().Use();           
+    }
+
+    private void Answer()
+    {
+        bool bonneReponse;
+        GameObject.FindGameObjectWithTag("Question").GetComponent<QuestionManager>().Reponse(out indice, out bonneReponse);
+        print(indice);
+
+        GameObject.Find("GameManager").GetComponent<GameManager>().appliquerReponse(indice);
+
+
+
+        talking = !bonneReponse;
     }
 
     private void FixedUpdate()
@@ -53,8 +83,8 @@ public class Player : MonoBehaviour
     private void Movement()
     {
 
-        rigidbody.velocity = new Vector2(Mathf.Lerp(0, Input.GetAxis("Horizontal") * runSpeed, 0.8f),
-                                                 Mathf.Lerp(0, Input.GetAxis("Vertical") * runSpeed, 0.8f));
+        rigidbody.velocity = new Vector2(Mathf.Lerp(0,horizontal * runSpeed, 0.8f),
+                                                 Mathf.Lerp(0, vertical * runSpeed, 0.8f));
 
 
         

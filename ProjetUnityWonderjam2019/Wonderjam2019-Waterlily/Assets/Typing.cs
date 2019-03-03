@@ -26,7 +26,7 @@ public class Typing : MonoBehaviour
                 if (GameObject.FindGameObjectsWithTag("Question") != null)
                 {
                     GameObject goQuestion = GameObject.FindGameObjectWithTag("Question");
-                    goQuestion.GetComponent<QuestionManager>().Reponse(inputField.text);
+                    //goQuestion.GetComponent<QuestionManager>().Reponse();
                 }
             }
 

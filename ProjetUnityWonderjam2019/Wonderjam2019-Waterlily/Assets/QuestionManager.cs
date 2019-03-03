@@ -19,13 +19,18 @@ public class QuestionManager : MonoBehaviour
 
     public List<Sprite> imageUI = new List<Sprite>();
 
-    // Start is called before the first frame update
-    public void InitialiserQuestion(Question laQuestion_, int type) // 1 = Ordinateur / Autre = Bulles
-    {
+    public InputField inputField;
 
+    public Utilisable stuff;
+
+    // Start is called before the first frame update
+    public void InitialiserQuestion(Question laQuestion_, int type, Utilisable stuff_) // 1 = Ordinateur / Autre = Bulles
+    {
+        stuff = stuff_;
         laQuestion = laQuestion_;
 
         goQuestion = this.gameObject;
+        inputField = this.gameObject.GetComponentInChildren<InputField>();
 
         if (type == 1)
         {
@@ -55,6 +60,11 @@ public class QuestionManager : MonoBehaviour
 
         }
 
+        this.gameObject.SetActive(true);
+
+        inputField.text = "";
+        inputField.Select();
+        inputField.ActivateInputField();
     }
 
     // Update is called once per frame
@@ -76,26 +86,27 @@ public class QuestionManager : MonoBehaviour
         }
     }
 
-    public int Reponse(string laReponse_)
+    public void Reponse(out int indiceRetour, out bool bienRepondu)
     {
-
-        int indice = 0;
+        string laReponse_;
+        laReponse_ = inputField.text;
         Debug.Log("Une réponse a été faites: " + laReponse_);
 
-        bool bienRepondu = false;
+        indiceRetour = 0;
+        bienRepondu = false;
 
         for (int i = 0; i < reponsesRandom.Count; i++)
         {
-            if (laReponse_ == reponsesRandom[i].stringReponse)
+            if (laReponse_.ToLower() == reponsesRandom[i].stringReponse.ToLower())
             {
-                indice = reponsesRandom[i].indiceReponse;
+                indiceRetour = reponsesRandom[i].indiceReponse;
 
                 Color colorText;
-                if (indice > 0)
+                if (indiceRetour > 0)
                 {
                     colorText = Color.green;
                 }
-                else if (indice < 0)
+                else if (indiceRetour < 0)
                 {
                     colorText = Color.red;
                 }
@@ -114,16 +125,21 @@ public class QuestionManager : MonoBehaviour
             StartCoroutine(ShakeQuestion(0.25f, 25f));
         }
 
-        return indice;
-
     }
 
     IEnumerator FadeQuestion(float fadeTime, float movementAmount, int answerChosen)
     {
         yield return new WaitForSeconds(0.5f);
 
+        Vector3 startPosition = goQuestion.transform.localPosition;
+        Vector3 startPositionAnswer = goReponses[answerChosen].transform.localPosition;
+
+
         float startPositionY = goQuestion.transform.localPosition.y;
         float startPositionAnswerY = goReponses[answerChosen].transform.localPosition.y;
+
+        Image[] listeImages = goQuestion.GetComponentsInChildren<Image>();
+        Text[] listeText = goQuestion.GetComponentsInChildren<Text>();
 
         float y = 0;
         for (float i = fadeTime; i > 0; i -= Time.deltaTime)
@@ -134,7 +150,7 @@ public class QuestionManager : MonoBehaviour
             y += Time.deltaTime;
             float actualMovementY = (y * movementAmount / fadeTime);
 
-            Debug.Log(actualMovementY);
+            //Debug.Log(actualMovementY);
 
             //Movement
             goQuestion.transform.localPosition = new Vector3(goQuestion.transform.localPosition.x, startPositionY - actualMovementY, goQuestion.transform.localPosition.z);
@@ -142,7 +158,6 @@ public class QuestionManager : MonoBehaviour
 
 
             //Fade
-            Image[] listeImages = goQuestion.GetComponentsInChildren<Image>();
 
             for (int h = 0; h < listeImages.Length; h++)
             {
@@ -150,8 +165,6 @@ public class QuestionManager : MonoBehaviour
                 c.a = Mathf.Lerp(0, 1, lerpFadeAmount);
                 listeImages[h].color = c;
             }
-
-            Text[] listeText = goQuestion.GetComponentsInChildren<Text>();
 
             for (int h = 0; h < listeText.Length; h++)
             {
@@ -161,6 +174,37 @@ public class QuestionManager : MonoBehaviour
             }
             yield return null;
         }
+
+
+        this.gameObject.SetActive(false);
+        goQuestion.transform.localPosition = startPosition;
+        goReponses[answerChosen].transform.localPosition = startPositionAnswer;
+
+        for (int h = 0; h < listeImages.Length; h++)
+        {
+            Color c = listeImages[h].color;
+            c.a = 1;
+            listeImages[h].color = c;
+        }
+
+        for (int h = 0; h < listeText.Length; h++)
+        {
+            Color c = listeText[h].color;
+            c.a = 1;
+            listeText[h].color = c;
+        }
+
+        for (int h = 0; h < goReponses.Count; h++)
+        {
+            Destroy(goReponses[h]);
+        }
+
+        goReponses = new List<GameObject>();
+
+        stuff.endCall();
+
+        readyToAnswer = false;
+        yield return null;
     }
 
 
@@ -187,5 +231,11 @@ public class QuestionManager : MonoBehaviour
             goQuestion.transform.localPosition = Vector3.Lerp(new Vector3(leftPositionX, goQuestion.transform.localPosition.y), new Vector3(startPositionX, goQuestion.transform.localPosition.y), i / (shakeTime/4));
             yield return null;
         }
+
+        goQuestion.transform.localPosition = new Vector3(startPositionX, goQuestion.transform.localPosition.y);
+
+        inputField.text = "";
+        inputField.Select();
+        inputField.ActivateInputField();
     }
 }

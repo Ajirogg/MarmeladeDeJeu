@@ -9,9 +9,13 @@ public class Telephone : MonoBehaviour, Utilisable
     public int timeToAnswer;
     public float timeStartCall;
 
+    public float timeLastCall;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        timeLastCall = Time.time;
         isRinging = false;
         isAnswering = false;
         timeToAnswer = Random.Range(10, 15 + 1);
@@ -40,18 +44,22 @@ public class Telephone : MonoBehaviour, Utilisable
 
     public void endCall()
     {
+        timeLastCall = Time.time;
         isAnswering = false;
         isRinging = false;
         timeToAnswer = Random.Range(10, 15 + 1);
         print("o revoar");
     }
 
-    public void Use()
+    public bool Use()
     {
         if (isRinging)
         {
             ConversationBegin();
+            return true;
         }
+
+        return false;
 
     }
 }

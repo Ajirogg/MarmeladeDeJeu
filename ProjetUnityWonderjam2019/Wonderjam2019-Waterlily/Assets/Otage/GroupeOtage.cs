@@ -46,9 +46,15 @@ public class GroupeOtage : MonoBehaviour, Utilisable
         }
     }
 
-    public void Use()
+    public void endCall()
     {
         throw new System.NotImplementedException();
+    }
+
+    public bool Use()
+    {
+        throw new System.NotImplementedException();
+        return false;
     }
 
 }

@@ -64,8 +64,15 @@ public class Otage : MonoBehaviour, Utilisable
         }
         lastStressRaise = Time.time;
     }
-    public void Use() //interface implementation
+    public bool Use() //interface implementation
+    {
+        throw new System.NotImplementedException();
+        return false;
+    }
+
+    public void endCall()
     {
         throw new System.NotImplementedException();
     }
+        
 }

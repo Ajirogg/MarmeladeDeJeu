@@ -4369,7 +4369,7 @@ PrefabInstance:
     - target: {fileID: 7799772133341736706, guid: e34743a5e8a72cf41b9bda045ac59d4a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e34743a5e8a72cf41b9bda045ac59d4a, type: 3}
@@ -6683,6 +6683,8 @@ MonoBehaviour:
   agressivitePolice: 0
   frequenceAppel: 60
   frequenceAppelMinimum: 60
+  "sir\xE8ne": {fileID: 8300000, guid: cce7c61aaf746904ea8143126963a271, type: 3}
+  voiture: {fileID: 8300000, guid: e3bcd34f9267c4e48b9d059d108c7c41, type: 3}
 --- !u!4 &828602938
 Transform:
   m_ObjectHideFlags: 0
@@ -7459,6 +7461,7 @@ MonoBehaviour:
   telephone: {fileID: 31865189}
   ordinateur: {fileID: 1223192035}
   player: {fileID: 28614866}
+  tir: {fileID: 8300000, guid: f02b5b72185dc1c478f2781eb4d8657d, type: 3}
   questionUI: {fileID: 960369903}
   cooldownPoliceEnervement: 5
 --- !u!4 &2142303903

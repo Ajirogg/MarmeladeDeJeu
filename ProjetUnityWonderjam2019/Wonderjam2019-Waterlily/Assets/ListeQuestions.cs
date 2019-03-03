@@ -116,6 +116,7 @@ public class ListeQuestions
         questionsOtageGroupe.Add(uneQuestion);
 
 
+
     }
 
     //L'indice correspond à l'effet sur la barre d'agitation de l'otage
@@ -125,13 +126,24 @@ public class ListeQuestions
     {
         List<Reponse> uneListeReponses = new List<Reponse>
         {
-            new Reponse("Calmez-vous", 50),
-            new Reponse("Peut-etre", -25),
-            new Reponse("Non", -50),
+            new Reponse("dire à ma maman", 50),
+            new Reponse("Calme toi", 25),
+            new Reponse("je vais te tuez", -10),
             new Reponse("Meurs", 666),
         };
 
-        Question uneQuestion = new Question("Est-ce que les otages vont bien ?", uneListeReponses);
+        Question uneQuestion = new Question("Vous menacez l'otage pour le calmer :", uneListeReponses);
+        questionsOtageIndividuel.Add(uneQuestion);
+
+        uneListeReponses = new List<Reponse>
+        {
+            new Reponse("Pas de bonne situation", 30),
+            new Reponse("Et mort ?", -10),
+            new Reponse("non", 40),
+            new Reponse("Meurs", 666),
+        };
+
+        uneQuestion = new Question("Un otage vous demande si c'est une bonne situation braqueur :", uneListeReponses);
         questionsOtageIndividuel.Add(uneQuestion);
 
 

@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
         }
 
 
-        if(telephone.timeLastCall + /*police.GetFrequenceAppel()*/ 10 <= Time.time && !telephone.isRinging && !telephone.isAnswering)
+        if(telephone.timeLastCall + police.GetFrequenceAppel() <= Time.time && !telephone.isRinging && !telephone.isAnswering)
         {
             telephone.StartCall();
             
@@ -176,10 +176,8 @@ public class GameManager : MonoBehaviour
     public void OtageLeave(Otage ota)
     {
         police.AugmenterAgressivite(5 * police.etatPolice);
-        print("L'otage est partis de jhonny haliday ");
         ota.GetGroupeOtage().otages.Remove(ota);
         ota.GetGroupeOtage().subtractYelling();
-        Destroy(ota.gameObject);
     }
 
 }

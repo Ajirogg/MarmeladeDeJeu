@@ -21,7 +21,7 @@ public class Telephone : MonoBehaviour, Utilisable
         timeLastCall = Time.time;
         isRinging = false;
         isAnswering = false;
-        timeToAnswer = Random.Range(10, 15 + 1);
+        timeToAnswer = Random.Range(5, 10 + 1);
         telephoneAnimator = this.GetComponentInChildren<Animator>();
     }
 
@@ -38,7 +38,6 @@ public class Telephone : MonoBehaviour, Utilisable
         isRinging = true;
         telephoneAnimator.SetBool("isRinging", isRinging);
         timeStartCall = Time.time;
-        print("Gaston y a le telefon qui son");
     }
 
     public void ConversationBegin()
@@ -49,7 +48,6 @@ public class Telephone : MonoBehaviour, Utilisable
         isAnswering = true;
         isRinging = false;
         telephoneAnimator.SetBool("isRinging", isRinging);
-        print("ALLO");
         // Doit appeler la fonction de discussion entre police et preneur d'otages
     }
 
@@ -59,8 +57,7 @@ public class Telephone : MonoBehaviour, Utilisable
         isAnswering = false;
         isRinging = false;
         telephoneAnimator.SetBool("isRinging", isRinging);
-        timeToAnswer = Random.Range(10, 15 + 1);
-        print("o revoar");
+        timeToAnswer = Random.Range(5, 10 + 1);
     }
 
     public bool Use()

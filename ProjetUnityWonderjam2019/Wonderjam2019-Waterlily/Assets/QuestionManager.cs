@@ -15,7 +15,7 @@ public class QuestionManager : MonoBehaviour
 
     float espacementEntreReponses = 50f;
 
-    public bool readyToAnswer = false;
+    public bool readyToAnswer = true;
 
     public List<Sprite> imageUI = new List<Sprite>();
 
@@ -24,12 +24,15 @@ public class QuestionManager : MonoBehaviour
     public Utilisable stuff;
 
     public bool shaking;
+    public bool alreadyAnswered;
 
     // Start is called before the first frame update
     public void InitialiserQuestion(Question laQuestion_, int type, Utilisable stuff_) // 1 = Ordinateur / Autre = Bulles
     {
         stuff = stuff_;
         laQuestion = laQuestion_;
+        alreadyAnswered = false;
+
 
         goQuestion = this.gameObject;
         inputField = this.gameObject.GetComponentInChildren<InputField>();
@@ -67,6 +70,9 @@ public class QuestionManager : MonoBehaviour
         inputField.text = "";
         inputField.Select();
         inputField.ActivateInputField();
+
+        alreadyAnswered = false;
+        readyToAnswer = true;
     }
 
     // Update is called once per frame
@@ -90,6 +96,7 @@ public class QuestionManager : MonoBehaviour
 
     public void Reponse(out int indiceRetour, out bool bienRepondu)
     {
+        readyToAnswer = false;
         string laReponse_;
         laReponse_ = inputField.text;
         //Debug.Log("Une réponse a été faites: " + laReponse_);
@@ -131,81 +138,85 @@ public class QuestionManager : MonoBehaviour
 
     IEnumerator FadeQuestion(float fadeTime, float movementAmount, int answerChosen)
     {
-        yield return new WaitForSeconds(0.5f);
-
-        Vector3 startPosition = goQuestion.transform.localPosition;
-        Vector3 startPositionAnswer = goReponses[answerChosen].transform.localPosition;
-
-
-        float startPositionY = goQuestion.transform.localPosition.y;
-        float startPositionAnswerY = goReponses[answerChosen].transform.localPosition.y;
-
-        Image[] listeImages = goQuestion.GetComponentsInChildren<Image>();
-        Text[] listeText = goQuestion.GetComponentsInChildren<Text>();
-
-        float y = 0;
-        for (float i = fadeTime; i > 0; i -= Time.deltaTime)
+        if (!alreadyAnswered)
         {
+            alreadyAnswered = true;
+            yield return new WaitForSeconds(0.5f);
 
-            float lerpFadeAmount = (i / fadeTime);
-            //Debug.Log(lerpFadeAmount);
-            y += Time.deltaTime;
-            float actualMovementY = (y * movementAmount / fadeTime);
-
-            //Debug.Log(actualMovementY);
-
-            //Movement
-            goQuestion.transform.localPosition = new Vector3(goQuestion.transform.localPosition.x, startPositionY - actualMovementY, goQuestion.transform.localPosition.z);
-            goReponses[answerChosen].transform.localPosition = new Vector3(goReponses[answerChosen].transform.localPosition.x, startPositionAnswerY + actualMovementY * 2, goReponses[answerChosen].transform.localPosition.z);
+            Vector3 startPosition = goQuestion.transform.localPosition;
+            Vector3 startPositionAnswer = goReponses[answerChosen].transform.localPosition;
 
 
-            //Fade
+            float startPositionY = goQuestion.transform.localPosition.y;
+            float startPositionAnswerY = goReponses[answerChosen].transform.localPosition.y;
+
+            Image[] listeImages = goQuestion.GetComponentsInChildren<Image>();
+            Text[] listeText = goQuestion.GetComponentsInChildren<Text>();
+
+            float y = 0;
+            for (float i = fadeTime; i > 0; i -= Time.deltaTime)
+            {
+
+                float lerpFadeAmount = (i / fadeTime);
+                //Debug.Log(lerpFadeAmount);
+                y += Time.deltaTime;
+                float actualMovementY = (y * movementAmount / fadeTime);
+
+                //Debug.Log(actualMovementY);
+
+                //Movement
+                goQuestion.transform.localPosition = new Vector3(goQuestion.transform.localPosition.x, startPositionY - actualMovementY, goQuestion.transform.localPosition.z);
+                goReponses[answerChosen].transform.localPosition = new Vector3(goReponses[answerChosen].transform.localPosition.x, startPositionAnswerY + actualMovementY * 2, goReponses[answerChosen].transform.localPosition.z);
+
+
+                //Fade
+
+                for (int h = 0; h < listeImages.Length; h++)
+                {
+                    Color c = listeImages[h].color;
+                    c.a = Mathf.Lerp(0, 1, lerpFadeAmount);
+                    listeImages[h].color = c;
+                }
+
+                for (int h = 0; h < listeText.Length; h++)
+                {
+                    Color c = listeText[h].color;
+                    c.a = Mathf.Lerp(0, 1, lerpFadeAmount);
+                    listeText[h].color = c;
+                }
+                yield return null;
+            }
+
+
+            this.gameObject.SetActive(false);
+            goQuestion.transform.localPosition = startPosition;
+            goReponses[answerChosen].transform.localPosition = startPositionAnswer;
 
             for (int h = 0; h < listeImages.Length; h++)
             {
                 Color c = listeImages[h].color;
-                c.a = Mathf.Lerp(0, 1, lerpFadeAmount);
+                c.a = 1;
                 listeImages[h].color = c;
             }
 
             for (int h = 0; h < listeText.Length; h++)
             {
                 Color c = listeText[h].color;
-                c.a = Mathf.Lerp(0, 1, lerpFadeAmount);
+                c.a = 1;
                 listeText[h].color = c;
             }
-            yield return null;
+
+            for (int h = 0; h < goReponses.Count; h++)
+            {
+                Destroy(goReponses[h]);
+            }
+
+            goReponses = new List<GameObject>();
+
+            stuff.endCall();
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().talking = false;
         }
-
-
-        this.gameObject.SetActive(false);
-        goQuestion.transform.localPosition = startPosition;
-        goReponses[answerChosen].transform.localPosition = startPositionAnswer;
-
-        for (int h = 0; h < listeImages.Length; h++)
-        {
-            Color c = listeImages[h].color;
-            c.a = 1;
-            listeImages[h].color = c;
-        }
-
-        for (int h = 0; h < listeText.Length; h++)
-        {
-            Color c = listeText[h].color;
-            c.a = 1;
-            listeText[h].color = c;
-        }
-
-        for (int h = 0; h < goReponses.Count; h++)
-        {
-            Destroy(goReponses[h]);
-        }
-
-        goReponses = new List<GameObject>();
-
-        stuff.endCall();
-
-        readyToAnswer = false;
+        alreadyAnswered = false;
         yield return null;
     }
 
@@ -243,6 +254,7 @@ public class QuestionManager : MonoBehaviour
 
             shaking = false;
         }
+        readyToAnswer = true;
         yield return null;
     }
 }

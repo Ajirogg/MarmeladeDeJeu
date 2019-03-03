@@ -11,6 +11,11 @@ public class Police : MonoBehaviour
     public int frequenceAppelMinimum = 60; // Fréquence en seconde d'appel de la police
     public AudioClip sirène;
     public AudioClip voiture;
+    public List<AudioClip> MusicThemes;
+    public int transition = 0 ;
+    public int songPlaying = -1;
+    public float volumeMin = 0.1f;
+    public float volumeMax ;
 
     // Start is called before the first frame update
     void Start()
@@ -18,22 +23,57 @@ public class Police : MonoBehaviour
         etatPolice = 1;
        // barreEtatPolice = 0;
         agressivitePolice = 0;
+        volumeMax = SoundManager.instance.maxMusicSource *  OptionsManager.Instance.GetVolumeMusic();
     }
 
     // Update is called once per frame
     void Update()
     {
-     
+        if (transition == 1)
+        {
+            if (SoundManager.instance.musicSource.volume > volumeMin)
+            {
+                SoundManager.instance.musicSource.volume -= 0.005f;
+            }
+            else
+            {
+                if (SoundManager.instance.musicSource.clip != MusicThemes[3])
+                {
+                    songPlaying++;
+                    SoundManager.instance.musicSource.clip = MusicThemes[songPlaying];
+                    SoundManager.instance.musicSource.Play();
+                    transition++;
+                }
+            }
+        }
+        else if (transition == 2)
+        {
+            if (SoundManager.instance.musicSource.volume < volumeMax)
+            {
+                SoundManager.instance.musicSource.volume += 0.005f;
+            }
+            else
+            {
+                SoundManager.instance.musicSource.volume = volumeMax ;
+                transition = 0 ;
+            }
+        }
     }
 
     public void augmenterEtat()
     {
+        etatPolice++;
+        print("Etat de la police : " + etatPolice);
+        transition = 1;
         if (etatPolice == 2)
         {
             SoundManager.instance.efxExterieur.clip = voiture;
             SoundManager.instance.efxExterieur.Play();
         }
-        etatPolice++;
+        if (etatPolice == 3)
+        {
+            SoundManager.instance.efxSirene.Play() ;
+        }
     }
 
     public void PrintPoliceTest()
@@ -51,11 +91,6 @@ public class Police : MonoBehaviour
             agressivitePolice = 0;
         frequenceAppel = frequenceAppelMinimum - (frequenceAppelMinimum * etatPolice * 10 / 100);
 
-        if (agressivitePolice > 79)
-            SoundManager.instance.efxSirene.Play();
-        else
-            SoundManager.instance.efxSirene.Stop();
-
     }
 
     public void DiminuerAgressivite(int value)
@@ -63,8 +98,7 @@ public class Police : MonoBehaviour
         agressivitePolice -= value;
         if (agressivitePolice < 0)
             agressivitePolice = 0;
-        if (agressivitePolice < 80)
-            SoundManager.instance.efxSirene.Stop();
+
     }
 
     public int GetFrequenceAppel()

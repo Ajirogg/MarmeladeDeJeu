@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public ComputerComponent ordinateur;
     public Player player;
     public AudioClip tir;
+    public AudioClip ambulance;
 
     public GameObject questionUI;
     public ListeQuestions laListeDesQuestions = new ListeQuestions();
@@ -51,7 +52,7 @@ public class GameManager : MonoBehaviour
 
         if (Time.time >= telephone.timeToAnswer + telephone.timeStartCall && telephone.isRinging)
         {
-            
+            SoundManager.instance.efxSonnerie.Stop();
             telephone.endCall();
             police.AugmenterAgressivite(25);
             police.augmenterEtat();
@@ -138,6 +139,8 @@ public class GameManager : MonoBehaviour
 
             SoundManager.instance.efxDialogue.clip = tir;
             SoundManager.instance.efxDialogue.Play();
+            SoundManager.instance.efxExterieur.clip = ambulance;
+            SoundManager.instance.efxExterieur.PlayDelayed(5);
             OtageLeave(ota);
         }
         else if (indice > 0)

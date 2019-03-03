@@ -9,11 +9,11 @@ public class SoundManager : MonoBehaviour
     public AudioSource efxExterieur;
     public AudioSource musicSource;                 //Drag a reference to the audio source which will play the music.
 
-    public float maxEfxSonnerie = 1;
+    public float maxEfxSonnerie = 0.2f;
     public float maxEfxDialogue = 1;
     public float maxEfxSirene = 0.2f;
-    public float maxEfxExterieur = 1;
-    public float maxMusicSource = 1;
+    public float maxEfxExterieur = 0.2f;
+    public float maxMusicSource = 0.8f;
 
     public static SoundManager instance = null;     //Allows other scripts to call functions from SoundManager.             
     public float lowPitchRange = .95f;              //The lowest a sound effect will be randomly pitched.

@@ -8,6 +8,8 @@ public class Telephone : MonoBehaviour, Utilisable
     public bool isAnswering;
     public int timeToAnswer;
     public float timeStartCall;
+    public AudioClip sonnerie;
+    public AudioClip allo;
 
     public float timeLastCall;
 
@@ -31,6 +33,8 @@ public class Telephone : MonoBehaviour, Utilisable
 
     public void StartCall()
     {
+        SoundManager.instance.efxSonnerie.Play();
+        
         isRinging = true;
         telephoneAnimator.SetBool("isRinging", isRinging);
         timeStartCall = Time.time;
@@ -39,6 +43,9 @@ public class Telephone : MonoBehaviour, Utilisable
 
     public void ConversationBegin()
     {
+        SoundManager.instance.efxSonnerie.Stop();
+        SoundManager.instance.efxDialogue.clip = allo ;
+        SoundManager.instance.efxDialogue.PlayDelayed(0.2f);
         isAnswering = true;
         isRinging = false;
         telephoneAnimator.SetBool("isRinging", isRinging);

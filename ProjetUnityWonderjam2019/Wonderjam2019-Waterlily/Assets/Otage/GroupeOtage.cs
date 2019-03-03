@@ -48,7 +48,10 @@ public class GroupeOtage : MonoBehaviour, Utilisable
 
     public void endCall()
     {
-        throw new System.NotImplementedException();
+        foreach (Otage ots in otages)
+        {
+            ots.talking = false;
+        }
     }
 
     public bool Use()
@@ -61,7 +64,7 @@ public class GroupeOtage : MonoBehaviour, Utilisable
         GameManager gm = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         gm.questionUI.GetComponent<QuestionManager>().readyToAnswer = true;
-        gm.questionUI.GetComponent<QuestionManager>().InitialiserQuestion(gm.laListeDesQuestions.GetRandomOtageIndividuel(), 0, this);
+        gm.questionUI.GetComponent<QuestionManager>().InitialiserQuestion(gm.laListeDesQuestions.GetRandomOtageGroupe(), 0, this);
 
         return true;
     }

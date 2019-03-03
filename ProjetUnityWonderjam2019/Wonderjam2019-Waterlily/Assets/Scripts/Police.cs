@@ -9,8 +9,8 @@ public class Police : MonoBehaviour
     public int agressivitePolice;  // Barre de progression de l'agressivité de la police 100 = défaite
     public int frequenceAppel = 60; // Fréquence en seconde d'appel de la police
     public int frequenceAppelMinimum = 60; // Fréquence en seconde d'appel de la police
-
-
+    public AudioClip sirène;
+    public AudioClip voiture;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +28,11 @@ public class Police : MonoBehaviour
 
     public void augmenterEtat()
     {
+        if (etatPolice == 2)
+        {
+            SoundManager.instance.efxExterieur.clip = voiture;
+            SoundManager.instance.efxExterieur.Play();
+        }
         etatPolice++;
     }
 
@@ -45,6 +50,12 @@ public class Police : MonoBehaviour
         if (agressivitePolice < 0)
             agressivitePolice = 0;
         frequenceAppel = frequenceAppelMinimum - (frequenceAppelMinimum * etatPolice * 10 / 100);
+
+        if (agressivitePolice > 79)
+            SoundManager.instance.efxSirene.Play();
+        else
+            SoundManager.instance.efxSirene.Stop();
+
     }
 
     public void DiminuerAgressivite(int value)
@@ -52,6 +63,8 @@ public class Police : MonoBehaviour
         agressivitePolice -= value;
         if (agressivitePolice < 0)
             agressivitePolice = 0;
+        if (agressivitePolice < 80)
+            SoundManager.instance.efxSirene.Stop();
     }
 
     public int GetFrequenceAppel()

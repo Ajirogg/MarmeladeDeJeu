@@ -111,6 +111,9 @@ public class TriggerUse : MonoBehaviour
 
         if (collider.gameObject.GetComponent<Utilisable>() != null)
         {
+            if (collider.gameObject.GetComponent<Otage>() != null && collider.gameObject.GetComponent<Otage>().hostageAnimator.GetBool("Died") == true)
+                return;
+
             ObjetsUtilisables.Add(collider.gameObject);
             curFirst = FirstObject();
         }

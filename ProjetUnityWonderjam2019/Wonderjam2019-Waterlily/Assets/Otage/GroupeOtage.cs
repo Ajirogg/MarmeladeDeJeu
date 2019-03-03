@@ -5,7 +5,9 @@ using UnityEngine;
 public class GroupeOtage : MonoBehaviour, Utilisable
 {
     public Otage otage;
-    public int nbOtage = 2 ;
+    public int nbOtage = 3 ;
+    public GameObject[] SpawnPoint;
+
     public int nbYelling = 0 ;
     public List<Otage> otages = new List<Otage>();
     public int raiseYelling = 6;
@@ -16,7 +18,7 @@ public class GroupeOtage : MonoBehaviour, Utilisable
     {
         pos = this.transform.position;
         for (int i = 0; i<nbOtage; i++) { 
-            Otage ota = Instantiate(otage, new Vector3((pos.x -1 + i*2) ,pos.y,0),Quaternion.identity);
+            Otage ota = Instantiate(otage, SpawnPoint[i].transform.position, SpawnPoint[i].transform.rotation);
             ota.transform.parent = gameObject.transform;
             otages.Add(ota);
         }

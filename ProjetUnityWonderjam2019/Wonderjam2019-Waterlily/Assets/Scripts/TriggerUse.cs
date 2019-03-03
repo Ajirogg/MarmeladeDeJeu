@@ -43,8 +43,26 @@ public class TriggerUse : MonoBehaviour
 
             ObjetsUtilisables.Add(collider.gameObject);
 
-            if (collider.gameObject != FirstObject()) // Maybe improve that ?
-                return;
+            if (collider.gameObject != FirstObject()) {
+                if (collider.gameObject.GetComponent<GroupeOtage>() == null)
+                    return;
+
+                foreach(Otage o in collider.gameObject.GetComponent<GroupeOtage>().otages) //Glow all hostages
+                {
+                    if (o.gameObject.GetComponent<SpriteGlow.SpriteGlowEffect>() != null)
+                    {
+                        o.gameObject.GetComponent<SpriteGlow.SpriteGlowEffect>().enabled = true;
+                    }
+                    else
+                    {
+                        SpriteGlow.SpriteGlowEffect n = o.gameObject.AddComponent<SpriteGlow.SpriteGlowEffect>();
+                        n.GlowBrightness = 1.38f;
+                    }
+                }
+                    
+            }
+            // Maybe improve that ?
+                
 
             if (collider.gameObject.GetComponent<SpriteGlow.SpriteGlowEffect>() != null)
             {
@@ -64,6 +82,18 @@ public class TriggerUse : MonoBehaviour
         if (collider.gameObject.GetComponent<Utilisable>() != null)
         {
             ObjetsUtilisables.Remove(collider.gameObject);
+
+            if(collider.gameObject.GetComponent<GroupeOtage>()!= null)
+            {
+                foreach (Otage o in collider.gameObject.GetComponent<GroupeOtage>().otages) //Glow all hostages
+                {
+                    if (o.gameObject.GetComponent<SpriteGlow.SpriteGlowEffect>() != null)
+                    {
+                        o.gameObject.GetComponent<SpriteGlow.SpriteGlowEffect>().enabled = false;
+                    }
+                }
+            }
+
             if (collider.gameObject.GetComponent<SpriteGlow.SpriteGlowEffect>() != null)
             {
                 collider.gameObject.GetComponent<SpriteGlow.SpriteGlowEffect>().enabled = false;

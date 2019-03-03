@@ -9,7 +9,7 @@ public class TriggerUse : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -30,7 +30,7 @@ public class TriggerUse : MonoBehaviour
 
         GameObject toReturn = ObjetsUtilisables.ToList()[0];
         foreach (GameObject ob in ObjetsUtilisables)
-        {            
+        {
             if (ob.GetComponent<GroupeOtage>() != null)
                 toReturn = ob;
             else if (ob.GetComponent<Otage>() != null)
@@ -38,11 +38,11 @@ public class TriggerUse : MonoBehaviour
                 Glow(ob);
                 return ob;
             }
-                
+
         }
         Glow(toReturn);
         return toReturn;
-    } 
+    }
 
 
 
@@ -53,7 +53,7 @@ public class TriggerUse : MonoBehaviour
             Glow(u.GetComponent<GroupeOtage>());
             return;
         }
-            
+
 
         if (u.gameObject.GetComponent<SpriteGlow.SpriteGlowEffect>() != null)
         {
@@ -77,7 +77,7 @@ public class TriggerUse : MonoBehaviour
 
     void unGlowAll(HashSet<GameObject> set)
     {
-        var b = GameObject.FindObjectsOfType<MonoBehaviour>();   
+        var b = GameObject.FindObjectsOfType<MonoBehaviour>();
 
         foreach(MonoBehaviour ob in b)
         {
@@ -91,7 +91,7 @@ public class TriggerUse : MonoBehaviour
     void unGlow(GameObject go)
     {
         if (go.GetComponent<GroupeOtage>() != null)
-        {           
+        {
             unGlowAll(ObjetsUtilisables);
             return;
         }
@@ -105,12 +105,12 @@ public class TriggerUse : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        
+
         if (collider.gameObject.GetComponent<Utilisable>() != null)
         {
             ObjetsUtilisables.Add(collider.gameObject);
             curFirst = FirstObject();
-        }        
+        }
     }
 
 
@@ -124,13 +124,13 @@ public class TriggerUse : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collider)
     {
-        
+
         if (collider.gameObject.GetComponent<Utilisable>() != null){
             ObjetsUtilisables.Remove(collider.gameObject);
             curFirst = FirstObject();
         }
 
-      
 
-    }  
+
+    }
 }

@@ -78,7 +78,6 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         Movement();
-        rigidbody.MoveRotation((-(int)angle / 90)*90);
     }
 
 

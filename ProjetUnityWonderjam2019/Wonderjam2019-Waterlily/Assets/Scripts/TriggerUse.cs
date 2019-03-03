@@ -53,7 +53,7 @@ public class TriggerUse : MonoBehaviour
             Glow(u.GetComponent<GroupeOtage>());
             return;
         }
-
+        SetYellow(u);
         if (u.GetComponentInChildren<SpriteRenderer>() != null) //Recupere le GO où il y a le sprite
             u = u.GetComponentInChildren<SpriteRenderer>().gameObject;
 
@@ -61,6 +61,7 @@ public class TriggerUse : MonoBehaviour
         if (u.gameObject.GetComponent<SpriteGlow.SpriteGlowEffect>() != null)
         {
             u.gameObject.GetComponent<SpriteGlow.SpriteGlowEffect>().enabled = true;
+
         }
         else
         {
@@ -77,6 +78,21 @@ public class TriggerUse : MonoBehaviour
         }
     }
 
+    private void SetYellow(GameObject o)
+    {
+        if(o.GetComponent<SpriteRenderer>() != null)
+            o.GetComponent<SpriteRenderer>().color = Color.yellow;
+        if (o.GetComponentInChildren<SpriteRenderer>() != null)
+            o.GetComponentInChildren<SpriteRenderer>().color = Color.yellow;
+    }
+
+    private void SetWhite(GameObject o)
+    {
+        if (o.GetComponent<SpriteRenderer>() != null)
+            o.GetComponent<SpriteRenderer>().color = Color.white;
+        if (o.GetComponentInChildren<SpriteRenderer>() != null)
+            o.GetComponentInChildren<SpriteRenderer>().color = Color.white;
+    }
 
     public void unGlowAll(HashSet<GameObject> set = null)
     {
@@ -89,6 +105,7 @@ public class TriggerUse : MonoBehaviour
         {
             if (ob.GetComponent<SpriteGlow.SpriteGlowEffect>() != null)
             {
+                SetWhite(ob.gameObject);
                 ob.GetComponent<SpriteGlow.SpriteGlowEffect>().enabled = false;
             }
         }
@@ -102,6 +119,7 @@ public class TriggerUse : MonoBehaviour
             return;
         }
 
+        SetWhite(go);
         if (go.GetComponent<SpriteGlow.SpriteGlowEffect>() != null)
         {
             go.GetComponent<SpriteGlow.SpriteGlowEffect>().enabled = false;

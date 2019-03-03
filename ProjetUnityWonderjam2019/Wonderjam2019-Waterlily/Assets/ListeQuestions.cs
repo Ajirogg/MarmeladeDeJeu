@@ -8,6 +8,7 @@ public class ListeQuestions
     public List<Question> questionsOrdinateur = new List<Question>();
     public List<Question> questionsOtageGroupe = new List<Question>();
     public List<Question> questionsOtageIndividuel = new List<Question>();
+    public List<Question> questionsFixOrdinateur = new List<Question>();
 
     public ListeQuestions()
     {
@@ -21,7 +22,7 @@ public class ListeQuestions
         InitialisationOrdinateur();
         InitialisationOtageGroupe();
         InitialisationOtageIndividuel();
-
+        InitialisationFixOrdinateur();
     }
 
     public Question GetRandomPolice()
@@ -44,6 +45,10 @@ public class ListeQuestions
         return questionsOtageIndividuel[Random.Range(0, questionsOtageIndividuel.Count)];
     }
 
+    public Question GetRandomFixOrdinateur()
+    {
+        return questionsFixOrdinateur[Random.Range(0, questionsFixOrdinateur.Count)];
+    }
 
     //L'indice correspond à l'effet sur la barre de la police
     private void InitialisationPolice()
@@ -78,7 +83,7 @@ public class ListeQuestions
     {
         List<Reponse> uneListeReponses = new List<Reponse>
         {
-            new Reponse("S4CR4T", 5000),
+            new Reponse("S4CR4T", 5),
         };
 
         Question uneQuestion = new Question("//BANK-ACCOUNT NUMBER 4861-8475// PASSWORD???", uneListeReponses);
@@ -87,7 +92,7 @@ public class ListeQuestions
 
         uneListeReponses = new List<Reponse>
         {
-            new Reponse("Reponse", 50),
+            new Reponse("Reponse", 3),
         };
 
         uneQuestion = new Question("//BANK-ACCOUNT NUMBER 1145-8445// PASSWORD???", uneListeReponses);
@@ -104,7 +109,7 @@ public class ListeQuestions
             new Reponse("Calmez-vous!", 50),
             new Reponse("Peut-etre", -25),
             new Reponse("Non", -50),
-            new Reponse("JE SUIS UN GROUPE D'OTAGE", -100),
+            new Reponse("GROUPE D'OTAGE", -100),
         };
 
         Question uneQuestion = new Question("Est-ce que les otages vont bien ?", uneListeReponses);
@@ -123,11 +128,34 @@ public class ListeQuestions
             new Reponse("Calmez-vous", 50),
             new Reponse("Peut-etre", -25),
             new Reponse("Non", -50),
-            new Reponse("JE SUIS UN OTAGE SANS AMI", 666),
+            new Reponse("OTAGE SANS AMI", 666),
         };
 
         Question uneQuestion = new Question("Est-ce que les otages vont bien ?", uneListeReponses);
         questionsOtageIndividuel.Add(uneQuestion);
+
+
+    }
+
+    //L'indice correspond au nombre d'argent récupéré
+    private void InitialisationFixOrdinateur()
+    {
+        List<Reponse> uneListeReponses = new List<Reponse>
+        {
+            new Reponse("Hello World", 1),
+        };
+
+        Question uneQuestion = new Question("Avez-vous essayé de redémarrer votre box.", uneListeReponses);
+        questionsFixOrdinateur.Add(uneQuestion);
+
+
+        uneListeReponses = new List<Reponse>
+        {
+            new Reponse("alt + f4", 1),
+        };
+
+        uneQuestion = new Question("This computer is broken.", uneListeReponses);
+        questionsFixOrdinateur.Add(uneQuestion);
 
 
     }

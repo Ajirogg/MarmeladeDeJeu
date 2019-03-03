@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ComputerComponent : MonoBehaviour
+public class ComputerComponent : MonoBehaviour, Utilisable
 {
     ScoreManager scoreManager;
 
@@ -99,7 +99,7 @@ public class ComputerComponent : MonoBehaviour
     }
 
     //Scoring Spontané
-    private void ManualMine(int indice)
+    public void ManualMine(int indice)
     {
         if(IsCurrentlyworking()) //Vérif état
             scoreManager.addScore(currentMiningAmount * indice);
@@ -133,5 +133,26 @@ public class ComputerComponent : MonoBehaviour
             SwitchOff();
         }
             
+    }
+
+    public bool Use() //interface implementation
+    {
+
+        GameManager gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+        gm.questionUI.GetComponent<QuestionManager>().readyToAnswer = true;
+
+        if (this.IsCurrentlyworking())
+            gm.questionUI.GetComponent<QuestionManager>().InitialiserQuestion(gm.laListeDesQuestions.GetRandomOrdinateur(), 1, this);
+        else
+            gm.questionUI.GetComponent<QuestionManager>().InitialiserQuestion(gm.laListeDesQuestions.GetRandomFixOrdinateur(), 1, this);
+
+
+
+        return true;
+    }
+
+    public void endCall()
+    {
     }
 }

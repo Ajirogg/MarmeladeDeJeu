@@ -103,7 +103,7 @@ public class Otage : MonoBehaviour, Utilisable
     }
     public void Dying()
     {
-        hostageAnimator.SetBool("Died", true);
+        hostageAnimator.SetBool("Dead", true);
         this.gameObject.GetComponent<CircleCollider2D>().enabled = false;
         this.gameObject.GetComponent<Otage>().enabled = false;
         

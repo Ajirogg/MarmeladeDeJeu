@@ -11,6 +11,7 @@ public class Telephone : MonoBehaviour, Utilisable
     public AudioClip sonnerie;
     public AudioClip allo;
 
+
     public float timeLastCall;
 
     public Animator telephoneAnimator;
@@ -24,31 +25,35 @@ public class Telephone : MonoBehaviour, Utilisable
         timeToAnswer = Random.Range(8, 15 + 1);
         telephoneAnimator = this.GetComponentInChildren<Animator>();
 
-        sonar = GameObject.FindObjectOfType<SimpleSonarShader_Parent>();
+        
     }
 
-    private SimpleSonarShader_Parent sonar;
+    private GameObject sonar;
     public void CreateRing()
     {
-        if (sonar == null)
-            sonar = GameObject.FindObjectOfType<SimpleSonarShader_Parent>();
-
-        sonar.StartSonarRing(transform.position, 1);
+        if(sonar == null)
+            sonar = SonarMaster.CreateSonar(this.transform.position);
     }
-    // Update is called once per frame
+    public void RemoveRing()
+    {
+        if (sonar != null)
+            Destroy(sonar);
+    }
 
-    private float ringCountdown = 0.5f;
+    // Update is called once per frame
+   
     void Update()
     {
         if (isRinging)
-            ringCountdown -= Time.deltaTime;
-        else
-            return; 
-
-        if (ringCountdown <=0 ){
-            ringCountdown = 0.5f;
+        {
             this.CreateRing();
+
         }
+        else
+        {
+            RemoveRing();
+            return;
+        }  
 
     }
 

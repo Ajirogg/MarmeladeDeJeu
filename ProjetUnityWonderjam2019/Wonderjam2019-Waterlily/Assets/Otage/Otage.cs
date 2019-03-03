@@ -18,21 +18,19 @@ public class Otage : MonoBehaviour, Utilisable
     private void Start()
     {
         lastStressRaise = Time.time;
+        sonar = GameObject.FindObjectOfType<SimpleSonarShader_Parent>();
     }
 
-    private GameObject sonar;
+    private SimpleSonarShader_Parent sonar;
     public void CreateRing()
     {
         if (sonar == null)
-            sonar = SonarMaster.CreateSonar(this.transform.position);
-    }
-    public void RemoveRing()
-    {
-        if (sonar != null)
-            Destroy(sonar);
+            sonar = GameObject.FindObjectOfType<SimpleSonarShader_Parent>();
+        sonar.StartSonarRing(transform.position, 1);
     }
 
     // Update is called once per frame
+    private float ringCountdown = 0.8f;
     void Update()
     {
         if (lastStressRaise + stressPeriod <= Time.time && !talking) {
@@ -47,16 +45,15 @@ public class Otage : MonoBehaviour, Utilisable
         }
 
         if (isYelling)
-        {
-            this.CreateRing();
-
-        }
+            ringCountdown -= Time.deltaTime;
         else
-        {
-            RemoveRing();
             return;
-        }
 
+        if (ringCountdown <= 0)
+        {
+            ringCountdown = 0.8f;
+            this.CreateRing();
+        }
 
     }
 

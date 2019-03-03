@@ -128,7 +128,7 @@ public class ListeQuestions
             new Reponse("Calmez-vous", 50),
             new Reponse("Peut-etre", -25),
             new Reponse("Non", -50),
-            new Reponse("OTAGE SANS AMI", 666),
+            new Reponse("Meurs", 666),
         };
 
         Question uneQuestion = new Question("Est-ce que les otages vont bien ?", uneListeReponses);

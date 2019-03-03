@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public Telephone telephone;
     public ComputerComponent ordinateur;
     public Player player;
+    public AudioClip tir;
 
     public GameObject questionUI;
     public ListeQuestions laListeDesQuestions = new ListeQuestions();
@@ -21,7 +22,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         //questionUI = GameObject.FindGameObjectWithTag("Question");
-        
+        SoundManager.instance.musicSource.Play();
     }
 
     // Update is called once per frame
@@ -134,6 +135,9 @@ public class GameManager : MonoBehaviour
             {
                 ots.PanicDecrease(150);
             }
+
+            SoundManager.instance.efxDialogue.clip = tir;
+            SoundManager.instance.efxDialogue.Play();
             OtageLeave(ota);
         }
         else if (indice > 0)
